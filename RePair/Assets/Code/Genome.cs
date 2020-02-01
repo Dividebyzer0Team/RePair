@@ -72,8 +72,9 @@ public class Genome
 				}
 			}
 		}
+
 		// simply dividing summed traits by 3 for now
-		var keys = allTraits.Keys;
+		var keys = new List <string> (allTraits.Keys);
 		foreach (var k in keys)
 		{
 			allTraits[k] = allTraits[k] / 3;
