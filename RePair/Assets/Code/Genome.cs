@@ -58,7 +58,7 @@ public class Genome
 	{
 		var allTraits = new Dictionary <string, float> ();
 
-		foreach (var gene in m_genes)
+		void sumTraits(Gene gene)
 		{
 			foreach (var trait in gene.traits)
 			{
@@ -71,6 +71,15 @@ public class Genome
 					allTraits[trait.name] = trait.factor;
 				}
 			}
+		}
+
+		foreach (var gene in m_genes)
+		{
+			sumTraits(gene);
+		}
+		foreach (var gene in m_inactiveGenes)
+		{
+			sumTraits(gene);
 		}
 
 		return allTraits;
