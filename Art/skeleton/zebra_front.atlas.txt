@@ -1,0 +1,20 @@
+
+zebra_front.png
+size: 514,449
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+zebra-frontbody
+  rotate: false
+  xy: 2, 2
+  size: 381, 445
+  orig: 381, 445
+  offset: 0, 0
+  index: -1
+zebra-frontleg
+  rotate: false
+  xy: 385, 23
+  size: 127, 424
+  orig: 127, 424
+  offset: 0, 0
+  index: -1

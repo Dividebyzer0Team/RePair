@@ -1,0 +1,27 @@
+
+rhino_rear.png
+size: 826,584
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rhino_butt
+  rotate: false
+  xy: 2, 2
+  size: 666, 580
+  orig: 666, 580
+  offset: 0, 0
+  index: -1
+rhino_leg
+  rotate: false
+  xy: 670, 348
+  size: 146, 234
+  orig: 146, 234
+  offset: 0, 0
+  index: -1
+rhino_tail
+  rotate: false
+  xy: 670, 171
+  size: 154, 175
+  orig: 154, 175
+  offset: 0, 0
+  index: -1

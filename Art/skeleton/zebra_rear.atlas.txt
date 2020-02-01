@@ -1,0 +1,27 @@
+
+zebra_rear.png
+size: 855,428
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+zebra-rearbody
+  rotate: true
+  xy: 2, 62
+  size: 364, 325
+  orig: 364, 325
+  offset: 0, 0
+  index: -1
+zebra-rearleg
+  rotate: false
+  xy: 329, 2
+  size: 244, 424
+  orig: 244, 424
+  offset: 0, 0
+  index: -1
+zebra_teil
+  rotate: false
+  xy: 575, 84
+  size: 278, 342
+  orig: 278, 342
+  offset: 0, 0
+  index: -1

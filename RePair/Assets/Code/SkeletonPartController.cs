@@ -7,6 +7,7 @@ using Spine.Unity;
 
 public class SkeletonPartController : MonoBehaviour
 {
+
     public SkeletonDataAsset skeleton;
     
     public void PlayAnimation(string anim)

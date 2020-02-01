@@ -3,16 +3,15 @@ using System.Collections.Generic;
 
 public class Animal : MonoBehaviour
 {
+    public GameObject childPrefab;
+
     Genome m_genome;
     string m_state; // Строка со стейтом спайна для анимирования
     Dictionary<string, float> m_traits;
-    Animator mAnimator; // Класс для анимирования. Если кастомный - надо правильный сделать будет
-    float m_age;
     Rigidbody2D m_rigidbody;
     Behaviour m_behaviour;
     SkeletonController m_view;
     bool m_orientation = true; // true = left
-
     // ТЕСТОВОЕ
     public AnimalPreset preset;
     enum MovementMethod
@@ -39,15 +38,13 @@ public class Animal : MonoBehaviour
     public void Inherit(Animal parent1, Animal parent2)
     {
         m_genome = Genome.Breed(parent1.GetGenome(), parent2.GetGenome());
-        Color c1 = parent1.GetComponent<MeshRenderer>().material.color;
-        Color c2 = parent2.GetComponent<MeshRenderer>().material.color;
-        GetComponent<MeshRenderer>().material.color = new Color((c1.r + c2.r) * 0.5f, (c1.g + c2.g) * 0.5f, (c1.b + c2.b) * 0.5f);
         InitAnimal();
 
     }
 
     private void InitAnimal()
     {
+        Debug.Log("InitAnimal");
         m_traits = m_genome.GetAllTraits();
         m_traits["age"] = 0f;
         float canFly = GetTrait("flying") - GetTrait("size");
@@ -164,7 +161,7 @@ public class Animal : MonoBehaviour
     {
         Idle();
         other.Idle();
-        GameObject newAnimalGO = Instantiate(this.gameObject);
+        GameObject newAnimalGO = Instantiate(childPrefab);
         newAnimalGO.transform.position = (this.transform.position + other.transform.position) / 2;
         Animal newAnimal = newAnimalGO.GetComponent<Animal>();
         newAnimal.Inherit(this, other);

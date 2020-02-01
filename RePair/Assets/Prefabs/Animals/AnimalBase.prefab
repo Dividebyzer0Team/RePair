@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822e5a48fd1894782a70e3e491336e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preset: {fileID: 11400000, guid: 5bea2888ae65c134b85a68e080cc2e23, type: 2}
+  childPrefab: {fileID: 1027716922651645808}
+  preset: {fileID: 0}
 --- !u!50 &1027716922651645823
 Rigidbody2D:
   serializedVersion: 4

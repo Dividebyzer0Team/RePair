@@ -1,0 +1,27 @@
+
+goose_rear.png
+size: 708,368
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+goose-leg
+  rotate: true
+  xy: 456, 183
+  size: 183, 240
+  orig: 183, 240
+  offset: 0, 0
+  index: -1
+goose-rearbody
+  rotate: false
+  xy: 2, 2
+  size: 452, 364
+  orig: 452, 364
+  offset: 0, 0
+  index: -1
+goose-tail
+  rotate: false
+  xy: 456, 41
+  size: 250, 140
+  orig: 250, 140
+  offset: 0, 0
+  index: -1

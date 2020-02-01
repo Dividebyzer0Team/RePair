@@ -5,7 +5,8 @@ public class Meet : Behaviour
     public Meet(Animal host, Animal target) {
         m_host = host;
         m_target = target;
-        m_matingDistance = m_target.transform.localScale.x / 2 + m_host.transform.localScale.x / 2; // Дистанция траханья
+        m_matingDistance = 2f;
+        //m_matingDistance = m_target.transform.localScale.x / 2 + m_host.transform.localScale.x / 2; // Дистанция траханья
         m_name = "Meet";
     }
 

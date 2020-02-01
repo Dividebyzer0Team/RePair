@@ -1,0 +1,13 @@
+
+rhino_head.png
+size: 664,433
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rhino_head
+  rotate: false
+  xy: 2, 2
+  size: 660, 429
+  orig: 660, 429
+  offset: 0, 0
+  index: -1

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Zebra-Body
   m_EditorClassIdentifier: 
-  representation: {fileID: 0}
+  representation: {fileID: 6776935473807954563, guid: 875c29cf71f664a178932115e25e8c91,
+    type: 3}
   traits:
   - name: size
     factor: 0.6

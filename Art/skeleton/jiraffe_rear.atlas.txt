@@ -1,0 +1,27 @@
+
+jiraffe_rear.png
+size: 357,428
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+giraffe-rearbody
+  rotate: true
+  xy: 126, 174
+  size: 252, 226
+  orig: 252, 226
+  offset: 0, 0
+  index: -1
+giraffe-rearleg
+  rotate: false
+  xy: 2, 2
+  size: 122, 424
+  orig: 122, 424
+  offset: 0, 0
+  index: -1
+giraffe_tail
+  rotate: false
+  xy: 126, 70
+  size: 229, 102
+  orig: 229, 102
+  offset: 0, 0
+  index: -1

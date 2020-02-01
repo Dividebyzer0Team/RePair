@@ -1,0 +1,20 @@
+
+rhino_front.png
+size: 729,477
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rhino_back
+  rotate: true
+  xy: 2, 2
+  size: 473, 577
+  orig: 473, 577
+  offset: 0, 0
+  index: -1
+rhino_leg
+  rotate: false
+  xy: 581, 241
+  size: 146, 234
+  orig: 146, 234
+  offset: 0, 0
+  index: -1
