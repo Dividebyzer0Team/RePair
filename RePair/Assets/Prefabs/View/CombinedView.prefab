@@ -29,6 +29,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5185209480238337754}
+  - {fileID: 5185209479141768252}
+  - {fileID: 5185209481009063327}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,6 +57,7 @@ GameObject:
   - component: {fileID: 5185209479141768252}
   - component: {fileID: 5185209479141768255}
   - component: {fileID: 5185209479141768254}
+  - component: {fileID: 5960676267963484369}
   - component: {fileID: 5185209479141768253}
   m_Layer: 0
   m_Name: FrontBody
@@ -71,12 +74,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5185209479141768251}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.3010654, y: -0.352897, z: 1.8564233}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5185209481009063327}
-  m_Father: {fileID: 5185209480238337754}
-  m_RootOrder: 0
+  m_Children: []
+  m_Father: {fileID: 5185209479116322038}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5185209479141768255
 MeshFilter:
@@ -104,7 +106,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: decea34bf462bb6459956d8dfb17c444, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,6 +127,42 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5960676267963484369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5185209479141768251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: c7bee83c161117f40b241bebea1a5414, type: 2}
+  initialSkinName: 
+  initialFlipX: 0
+  initialFlipY: 0
+  separatorSlotNames: []
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 1
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  _animationName: walk
+  loop: 1
+  timeScale: 1
 --- !u!114 &5185209479141768253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad47bb9a8ded654fa5f162fc661c593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeleton: {fileID: 11400000, guid: abad02bbd12a8ec4588051e79cee5665, type: 2}
+  skeleton: {fileID: 11400000, guid: c7bee83c161117f40b241bebea1a5414, type: 2}
 --- !u!1 &5185209480238337702
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +187,7 @@ GameObject:
   - component: {fileID: 5185209480238337754}
   - component: {fileID: 5185209480238337753}
   - component: {fileID: 5185209480238337752}
+  - component: {fileID: 1788764514152641958}
   - component: {fileID: 5185209480238337703}
   m_Layer: 0
   m_Name: BackBody
@@ -167,8 +206,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.3010654, y: -0.352897, z: 1.8564233}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5185209479141768252}
+  m_Children: []
   m_Father: {fileID: 5185209479116322038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,7 +236,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4095098daa0ea464fb8033db80f1c476, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -219,6 +257,42 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1788764514152641958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5185209480238337702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: 7ebf429c8fcfab344b8762910200b63d, type: 2}
+  initialSkinName: 
+  initialFlipX: 0
+  initialFlipY: 0
+  separatorSlotNames: []
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 1
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  _animationName: walk
+  loop: 1
+  timeScale: 1
 --- !u!114 &5185209480238337703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad47bb9a8ded654fa5f162fc661c593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeleton: {fileID: 11400000, guid: c21ae232bb29d9c4f99280f4f2211305, type: 2}
+  skeleton: {fileID: 11400000, guid: 7ebf429c8fcfab344b8762910200b63d, type: 2}
 --- !u!1 &5185209481009063326
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +317,7 @@ GameObject:
   - component: {fileID: 5185209481009063327}
   - component: {fileID: 5185209481009063314}
   - component: {fileID: 5185209481009063313}
+  - component: {fileID: 4151821830106010082}
   - component: {fileID: 5185209481009063312}
   m_Layer: 0
   m_Name: Head
@@ -258,12 +333,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5185209481009063326}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5185209479141768252}
-  m_RootOrder: 0
+  m_Father: {fileID: 5185209479116322038}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5185209481009063314
 MeshFilter:
@@ -291,7 +366,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 69df5de57dd76364882ac357a6d9db0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,6 +387,42 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4151821830106010082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5185209481009063326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: 91a1599799b05a5468040748bc494f55, type: 2}
+  initialSkinName: 
+  initialFlipX: 0
+  initialFlipY: 0
+  separatorSlotNames: []
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 1
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  _animationName: walk
+  loop: 1
+  timeScale: 1
 --- !u!114 &5185209481009063312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,4 +435,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad47bb9a8ded654fa5f162fc661c593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeleton: {fileID: 11400000, guid: 60d0aeabe826fc04080105cdf7180245, type: 2}
+  skeleton: {fileID: 11400000, guid: 91a1599799b05a5468040748bc494f55, type: 2}

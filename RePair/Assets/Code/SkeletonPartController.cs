@@ -10,48 +10,53 @@ public class SkeletonPartController : MonoBehaviour
 
     public SkeletonDataAsset skeleton;
     
-    public void PlayAnimation(string anim)
+    Vector3 initialLocalPos;
+    Vector2 initialStackPointLocalPos;
+    Bone stackPoint;
+    
+    public void PlayAnimation(string anim, SkeletonAnimation parentSkeletonAnimation)
     {
+        // move to SetBodyPart
+        //Debug.Log(">>> 1 " + gameObject.name);
         SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
         if (skeletonAnimation != null) {
+            //Debug.Log(">>> 2 " + gameObject.name);
             // run animation
             skeletonAnimation.state.SetAnimation(0, anim, true);
 
-            // follow parent's stack point
-            GameObject parent = gameObject.transform.parent.gameObject;
-            if (parent != null) {
-                SkeletonAnimation parentSkeletonAnimation = parent.GetComponent<SkeletonAnimation>();
-                if (parentSkeletonAnimation != null) {
-                    Bone stackPoint = parentSkeletonAnimation.skeleton.FindBone("stack_point");
-                    if (stackPoint != null) {
-                        BoneFollower boneFollower = gameObject.GetComponent<BoneFollower>();
-                        boneFollower.SkeletonRenderer = parentSkeletonAnimation;
-                        boneFollower.SetBone("stack_point");
-                        boneFollower.Initialize();
-                    }
-                }
-            }
+            Vector3 localPos = gameObject.transform.localPosition;
+            initialLocalPos = new Vector3(localPos.x, localPos.y, localPos.z);
 
-            // recursively call other body parts
-            for (int i = 0; i < gameObject.transform.childCount; i++) {
-                GameObject child = gameObject.transform.GetChild(i).gameObject;
-                SkeletonPartController skel = child.GetComponent<SkeletonPartController>();
-                skel.PlayAnimation(anim);
+            // follow parent's stack point
+            if (parentSkeletonAnimation != null) {
+                //Debug.Log(">>> 3 " + gameObject.name);
+                stackPoint = parentSkeletonAnimation.skeleton.FindBone("stack_point");
+                if (stackPoint != null) {
+                    //Debug.Log(">>> 4 " + gameObject.name);
+                    initialStackPointLocalPos = new Vector2(stackPoint.WorldX, stackPoint.WorldY);
+                }
             }
         }
     }
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        SkeletonAnimation skeletonAnimation = gameObject.AddComponent<SkeletonAnimation>();
-        skeletonAnimation.skeletonDataAsset = skeleton;
-        skeletonAnimation.Initialize(false);
+    }
+
+    public void Update()
+    {
+        gameObject.transform.localPosition = new Vector3(initialLocalPos.x, initialLocalPos.y, initialLocalPos.z);
     }
 
     // Update is called once per frame
-    void Update()
+    public void LateUpdate()
     {
-        
+        if (stackPoint != null) {
+            Vector3 localPos = gameObject.transform.localPosition;
+            float worldXDiff = stackPoint.WorldX - initialStackPointLocalPos.x;
+            float worldYDiff = stackPoint.WorldY - initialStackPointLocalPos.y;
+            gameObject.transform.localPosition = new Vector3(localPos.x + worldXDiff, localPos.y + worldYDiff, localPos.z);
+        }
     }
 }

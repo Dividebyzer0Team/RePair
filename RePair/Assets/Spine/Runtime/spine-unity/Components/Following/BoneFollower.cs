@@ -79,12 +79,6 @@ namespace Spine.Unity {
 		Transform skeletonTransform;
 		bool skeletonTransformIsParent;
 
-        float initialLocalX;
-        float initialLocalY;
-        
-        float boneInitialX;
-        float boneInitialY;
-
 		/// <summary>
 		/// Sets the target bone by its bone name. Returns false if no bone was found. To set the bone by reference, use BoneFollower.bone directly.</summary>
 		public bool SetBone (string name) {
@@ -94,8 +88,6 @@ namespace Spine.Unity {
 				return false;
 			}
 			boneName = name;
-            boneInitialX = bone.x;
-            boneInitialY = bone.y;
 			return true;
 		}
 
@@ -124,9 +116,6 @@ namespace Spine.Unity {
 			if (Application.isEditor)
 				LateUpdate();
 			#endif
-            
-            initialLocalX = this.transform.localPosition.x;
-            initialLocalY = this.transform.localPosition.y;
 		}
 
 		void OnDestroy () {
@@ -134,9 +123,8 @@ namespace Spine.Unity {
 				skeletonRenderer.OnRebuild -= HandleRebuildRenderer;
 		}
 
-        public void Update()
+        public void PostRender()
         {
-            this.transform.localPosition.Set(initialLocalX, initialLocalY, this.transform.localPosition.z);
         }
 
 		public void LateUpdate () {
@@ -159,10 +147,8 @@ namespace Spine.Unity {
 			Transform thisTransform = this.transform;
 			if (skeletonTransformIsParent) {
 				// Recommended setup: Use local transform properties if Spine GameObject is the immediate parent
-                initialLocalX = thisTransform.localPosition.x;
-                initialLocalY = thisTransform.localPosition.y;
-				thisTransform.localPosition = new Vector3(followXYPosition ? thisTransform.localPosition.x + bone.x - boneInitialX : thisTransform.localPosition.x,
-														followXYPosition ? thisTransform.localPosition.y + bone.y - boneInitialY : thisTransform.localPosition.y,
+				thisTransform.localPosition = new Vector3(followXYPosition ? thisTransform.localPosition.x + bone.shearX : thisTransform.localPosition.x,
+														followXYPosition ? thisTransform.localPosition.y + bone.shearY : thisTransform.localPosition.y,
 														followZPosition ? 0f : thisTransform.localPosition.z);
 				if (followBoneRotation) {
 					float halfRotation = Mathf.Atan2(bone.c, bone.a) * 0.5f;
