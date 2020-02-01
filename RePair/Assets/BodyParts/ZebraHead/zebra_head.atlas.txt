@@ -1,0 +1,20 @@
+
+zebra_head.png
+size: 538,429
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+zebra-ear
+  rotate: true
+  xy: 465, 352
+  size: 75, 71
+  orig: 75, 71
+  offset: 0, 0
+  index: -1
+zebra_head
+  rotate: true
+  xy: 2, 2
+  size: 425, 461
+  orig: 425, 461
+  offset: 0, 0
+  index: -1
