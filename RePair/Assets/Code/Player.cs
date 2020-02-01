@@ -1,41 +1,53 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    List<Animal> animals;
+	public GameObject arrow;
+	public float arrowForceFactor = 1.0f;
+	public float chargeForceFactor = 1.0f;
+	public float chargeMaxTime = 1.5f;
 
-    private void Start()
-    {
-        animals = new List<Animal>();
-    }
+	private Animal m_queuedAnimal;
+	private float m_shotCharge, m_shotChargeTime;
 
-    void Update()
-    { 
-        if (Input.GetMouseButtonDown (0)){ 
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null)
-            {
-                GameObject clicked = hit.transform.gameObject;
-                Animal an = clicked.GetComponent<Animal>();
-                if (an != null)
-                {
-                    SelectAnimal(an);
-                    Debug.Log("Select animal");
-                }
-            }
-        }
-    }
+	void Start()
+	{
+	}
 
-    void SelectAnimal(Animal animal)
-    {
-        animals.Add(animal);
-        if (animals.Count > 1)
-        {
-            animals[0].OrderMeet(animals[1]);
-            animals[1].OrderMeet(animals[0]);
-            animals.Clear();
-        }
-    }
+	void Update()
+	{
+		if (Input.GetMouseButton(0))
+		{
+			m_shotChargeTime += Time.deltaTime;
+			if (m_shotChargeTime <= chargeMaxTime)
+			{
+				m_shotCharge += chargeForceFactor * Time.deltaTime;
+			}
+		}
+		if (Input.GetMouseButtonUp(0))
+		{
+			var arrowGO = GameObject.Instantiate(arrow);
+			var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+			var arrowRB = arrowGO.GetComponent <Rigidbody2D> ();
+			arrowRB.AddForce(dir * (arrowForceFactor + m_shotCharge), ForceMode2D.Impulse);
+			m_shotCharge = m_shotChargeTime = 0;
+			var arrowBeh = arrowGO.GetComponent <Arrow> ();
+			arrowBeh.OnCollisionWithAnimal += OnAnimalHit;
+		}
+	}
+
+	void OnAnimalHit(Animal animal)
+	{
+		if (!m_queuedAnimal)
+		{
+			m_queuedAnimal = animal;
+		}
+		else if (animal != m_queuedAnimal) // cannot select same animal twice
+		{
+			m_queuedAnimal.OrderMeet(animal);
+			animal.OrderMeet(animal);
+			m_queuedAnimal = null;
+		}
+	}
 }

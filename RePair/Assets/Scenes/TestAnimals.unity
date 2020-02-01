@@ -619,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 1027716922651645808, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
       propertyPath: m_Name
-      value: Tiger2
+      value: Tiger3
       objectReference: {fileID: 0}
     - target: {fileID: 1027716922651645818, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
@@ -704,7 +704,7 @@ PrefabInstance:
     - target: {fileID: 1027716922651645808, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
       propertyPath: m_Name
-      value: Tiger1
+      value: Tiger2
       objectReference: {fileID: 0}
     - target: {fileID: 1027716922651645818, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
@@ -895,7 +895,7 @@ PrefabInstance:
     - target: {fileID: 1027716922651645808, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
       propertyPath: m_Name
-      value: Tiger
+      value: Tiger1
       objectReference: {fileID: 0}
     - target: {fileID: 1027716922651645818, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
@@ -1001,6 +1001,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d60d91e34ddd482a80a480662e3dc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrow: {fileID: 6454257349755722092, guid: f1848fbb0ff6e92488f0e0f30e95c7de, type: 3}
+  arrowForceFactor: 1
+  chargeForceFactor: 5
+  chargeMaxTime: 1.5
 --- !u!33 &1231324900
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1157,7 +1161,7 @@ PrefabInstance:
     - target: {fileID: 1027716922651645808, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
       propertyPath: m_Name
-      value: Tiger3
+      value: Tiger4
       objectReference: {fileID: 0}
     - target: {fileID: 1027716922651645818, guid: 70791c58c20f84d5e85da6091d240292,
         type: 3}
