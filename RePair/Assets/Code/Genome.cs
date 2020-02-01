@@ -50,6 +50,29 @@ public class Genome
 			while (inactiveGeneSetIndex == activeGeneSetIndex); // inactive gene index should be different from active
 			child.m_inactiveGenes.Add(allGenes[inactiveGeneSetIndex][i]);
 		}
+
 		return child;
+	}
+
+	public Dictionary <string, float> GetAllTraits()
+	{
+		var allTraits = new Dictionary <string, float> ();
+
+		foreach (var gene in m_genes)
+		{
+			foreach (var trait in gene.traits)
+			{
+				if (allTraits.ContainsKey(trait.name))
+				{
+					allTraits[trait.name] += trait.factor;
+				}
+				else
+				{
+					allTraits[trait.name] = trait.factor;
+				}
+			}
+		}
+
+		return allTraits;
 	}
 }
