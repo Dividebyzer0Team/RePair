@@ -10,6 +10,8 @@ public class Animal : MonoBehaviour
     float m_age;
     Rigidbody2D m_rigidbody;
     Behaviour m_behaviour;
+    SkeletonController m_view;
+    bool m_orientation = true; // true = left
 
     // ТЕСТОВОЕ
     public AnimalPreset preset;
@@ -55,11 +57,19 @@ public class Animal : MonoBehaviour
             m_movementMethod = MovementMethod.FLY;
             m_rigidbody.gravityScale = 0f;
         }
-        var size = GetTrait("size");
-				transform.localScale = new Vector3(size, size, 1f);
+
         Invoke("Die", GetTrait("lifetime"));
+        float size = GetTrait("size");
+        GameObject legsGO = GameObject.Instantiate(m_genome.Legs.representation, m_view.transform);
+        legsGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+        GameObject bodyGO = GameObject.Instantiate(m_genome.Body.representation, legsGO.transform);
+        bodyGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+        GameObject headGO = GameObject.Instantiate(m_genome.Head.representation, bodyGO.transform);
+        headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+        transform.localScale = new Vector3(size, size, 1f);
 
     }
+
 
     void Die()
     {
@@ -68,6 +78,7 @@ public class Animal : MonoBehaviour
 
     void Awake()
     {
+        m_view = GetComponentInChildren<SkeletonController>();
         m_rigidbody = GetComponent<Rigidbody2D>();
         if (preset != null)
             InitFromPreset();
@@ -86,20 +97,29 @@ public class Animal : MonoBehaviour
         return m_traits[traitName];
     }
 
+    public void SetOrientation(bool orientation)
+    {
+        if (m_orientation != orientation)
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        m_orientation = orientation;
+    }
+
     public void Move(Vector3 position)
     {
         float time = Time.fixedDeltaTime;
         float speed = GetTrait("speed");
         if (m_movementMethod == MovementMethod.WALK)
         {
-            m_state = "walk"; 
+            SetState("walk");
             m_rigidbody.velocity = new Vector2(Mathf.Sign(position.x - transform.position.x) * speed, m_rigidbody.velocity.y);
+
         }
         if (m_movementMethod == MovementMethod.FLY)
         {
-            m_state = "fly"; 
+            SetState("fly");
             m_rigidbody.velocity = (position - transform.position).normalized * speed;
         }
+        SetOrientation(m_rigidbody.velocity.x > 0);
     }
 
     public void OnActionStop()
@@ -115,9 +135,17 @@ public class Animal : MonoBehaviour
         return m_behaviour;
     }
 
+    void SetState(string state)
+    {
+        if (m_state == state)
+            return;
+        m_state = state;
+        m_view.SwitchAnimationState(m_state);
+    }
+
     public void Idle()
     {
-        m_state = "idle"; // Тут будем рассказывать спайну, что начали стоять тупить
+        SetState("idle");
         m_behaviour = new Idle(this);
         //m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y); //Пока что обнуляем горзонтальную скорость
     }

@@ -34,11 +34,8 @@ public class Wander : Behaviour
         Vector2 wanderVector = wanderDirection * wanderDistance;
         if (flyingHeight > 0)
         {
-            Debug.Log(flyingHeight);
             float targetHeightOffset = Random.Range(-hostSize, hostSize);
-
             float targetHeight = flyingHeight + targetHeightOffset;
-            Debug.Log(targetHeight);
             float verticalDirection = targetHeight - m_host.transform.position.y;
             wanderVector.y = verticalDirection;
         }

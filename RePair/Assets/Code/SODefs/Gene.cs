@@ -12,7 +12,6 @@ public class Gene : ScriptableObject
 		public float factor;
 	}
 
-	[Tooltip("Пока плэйсхолдер, мы не знаем как именно будет визуализироваться ген")]
-	public Sprite representation;
+	public GameObject representation;
 	public List <Trait> traits;
 }
