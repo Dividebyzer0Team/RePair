@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class Animal : MonoBehaviour
@@ -48,7 +48,8 @@ public class Animal : MonoBehaviour
     {
         m_traits = m_genome.GetAllTraits();
         m_traits["age"] = 0f;
-        transform.localScale = new Vector3(GetTrait("size"), GetTrait("size"), 1f);
+        var size = GetTrait("size");
+				transform.localScale = new Vector3(size, size, 1f);
         Invoke("Die", GetTrait("lifetime"));
     }
 
