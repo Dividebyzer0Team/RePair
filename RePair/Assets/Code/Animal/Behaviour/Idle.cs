@@ -11,7 +11,7 @@ public class Idle : Behaviour
     public override void Update(float deltaTime)
     {
         base.Update(deltaTime);
-        m_host.GetRigidbody().velocity = Vector2.Lerp(m_host.GetRigidbody().velocity, Vector2.zero, deltaTime); //Потихоньку тормозимс на айдле
+        m_host.GetRigidbody().velocity = Vector2.Lerp(m_host.GetRigidbody().velocity, Vector2.zero, deltaTime / 5f ); //Потихоньку тормозимс на айдле
         m_idleTime -= deltaTime;
         if (m_idleTime < 0)
             Stop();

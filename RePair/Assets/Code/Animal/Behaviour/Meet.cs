@@ -14,6 +14,11 @@ public class Meet : Behaviour
     public override void Update(float deltaTime)
     {
         base.Update(deltaTime);
+        if (m_target == null)
+        {
+            m_host.Idle();
+            return;
+        }
         Vector2 toTarget = m_target.transform.position - m_host.transform.position;
         if (toTarget.magnitude <= m_matingDistance)
             Stop();

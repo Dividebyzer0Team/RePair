@@ -64,12 +64,12 @@ public class Genome
 			{
 				if (allTraits.ContainsKey(trait.name))
 				{
-					allTraits[trait.name] += trait.factor;
+					allTraits[trait.name] += trait.factor / 3; //dirty hack
 				}
 				else
 				{
-					allTraits[trait.name] = trait.factor;
-				}
+					allTraits[trait.name] = trait.factor / 3; //dirty hack
+                }
 			}
 		}
 
@@ -77,11 +77,7 @@ public class Genome
 		{
 			sumTraits(gene);
 		}
-		foreach (var gene in m_inactiveGenes)
-		{
-			sumTraits(gene);
-		}
 
-		return allTraits;
+        return allTraits;
 	}
 }

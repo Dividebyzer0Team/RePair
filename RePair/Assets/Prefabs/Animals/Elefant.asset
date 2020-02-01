@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Elefant
   m_EditorClassIdentifier: Assembly-CSharp::AnimalPreset
-  genes: []
+  genes:
+  - {fileID: 11400000, guid: 917684c150e2b4918a765c35a4f243b1, type: 2}
+  - {fileID: 11400000, guid: 917684c150e2b4918a765c35a4f243b1, type: 2}
+  - {fileID: 11400000, guid: 917684c150e2b4918a765c35a4f243b1, type: 2}

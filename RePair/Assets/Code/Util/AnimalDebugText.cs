@@ -16,6 +16,6 @@ public class AnimalDebugText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_text.text = m_animal.GetBehaviour().GetName();
+        m_text.text = string.Format("[{0:##}/{1:##}] {2}", m_animal.GetTrait("age"), m_animal.GetTrait("lifetime"), m_animal.GetBehaviour().GetName());
     }
 }

@@ -19,36 +19,58 @@ public class Animal : MonoBehaviour
         JUMP,
         FLY
     }
+
     MovementMethod m_movementMethod = MovementMethod.WALK;
     // ТЕСТОВОЕ
 
+    public Genome GetGenome()
+    {
+        return m_genome;
+    }
+
     private void InitFromPreset()
     {
-         
+        m_genome = new Genome(preset.genes);
+        InitAnimal();
+    }
+
+    public void Inherit(Animal parent1, Animal parent2)
+    {
+        m_genome = Genome.Breed(parent1.GetGenome(), parent2.GetGenome());
+        Color c1 = parent1.GetComponent<MeshRenderer>().material.color;
+        Color c2 = parent2.GetComponent<MeshRenderer>().material.color;
+        GetComponent<MeshRenderer>().material.color = new Color((c1.r + c2.r) * 0.5f, (c1.g + c2.g) * 0.5f, (c1.b + c2.b) * 0.5f);
+        InitAnimal();
+
+    }
+
+    private void InitAnimal()
+    {
+        m_traits = m_genome.GetAllTraits();
+        m_traits["age"] = 0f;
+        transform.localScale = new Vector3(GetTrait("size"), GetTrait("size"), 1f);
+        Invoke("Die", GetTrait("lifetime"));
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
-        m_traits = new Dictionary<string, float> {
-                { "speed", 2f },
-                { "thinkingTime" , 2f },
-                { "wanderDistance" , 5f }
-            };
-
-        Idle();
-
 
         // ТЕСТОВОЕ
-        Color[] randomColors = new Color[] { Color.blue, Color.green, Color.red, Color.yellow };
-        Color color = randomColors[Random.Range(0, 4)];
-        GetComponent<MeshRenderer>().material.color = color;
-
+        if (preset != null)
+            InitFromPreset();
+        Idle();
     }
 
     void FixedUpdate()
 	{
         m_behaviour.Update(Time.fixedDeltaTime);
+        m_traits["age"] += Time.fixedDeltaTime;
     }
 
     public float GetTrait(string traitName)
@@ -106,14 +128,13 @@ public class Animal : MonoBehaviour
     {
         Idle();
         other.Idle();
-        GameObject newAnimal = Instantiate(this.gameObject);
-        newAnimal.transform.position = (this.transform.position + other.transform.position) / 2;
+        GameObject newAnimalGO = Instantiate(this.gameObject);
+        newAnimalGO.transform.position = (this.transform.position + other.transform.position) / 2;
+        Animal newAnimal = newAnimalGO.GetComponent<Animal>();
+        newAnimal.Inherit(this, other);
 
         //Временно красим животных
-        Color c1 = GetComponent<MeshRenderer>().material.color;
-        Color c2 = other.GetComponent<MeshRenderer>().material.color;
-        newAnimal.GetComponent<MeshRenderer>().material.color = new Color((c1.r + c2.r) * 0.5f, (c1.g + c2.g) * 0.5f, (c1.b + c2.b) * 0.5f);
-        //creation of new animal
+       
     }
 
     public Rigidbody2D GetRigidbody()
