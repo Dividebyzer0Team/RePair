@@ -10,9 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
-  m_Name: GooseBody
+  m_Name: Giraffe-Body
   m_EditorClassIdentifier: 
   representation: {fileID: 0}
   traits:
-  - name: Flying
+  - name: size
+    factor: 2
+  - name: lifetime
+    factor: 25
+  - name: wanderdistance
+    factor: 3
+  - name: thinkingtime
+    factor: 0
+  - name: speed
+    factor: 2
+  - name: eating
+    factor: 3
+  - name: flying
     factor: 0

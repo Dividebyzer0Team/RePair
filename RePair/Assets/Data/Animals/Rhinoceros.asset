@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72be9affe506ef04ab45295975883f85, type: 3}
+  m_Name: Rhinoceros
+  m_EditorClassIdentifier: 
+  genes:
+  - {fileID: 11400000, guid: f15f38255a0cdb644abb3a7f69ce677c, type: 2}
+  - {fileID: 11400000, guid: 26540c6000fa500418e3ca1f99f6a16d, type: 2}
+  - {fileID: 11400000, guid: bf094a063845a3b41aa0dc6e6068a595, type: 2}

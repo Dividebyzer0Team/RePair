@@ -10,9 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
-  m_Name: GooseLegs
+  m_Name: Elefant-Head
   m_EditorClassIdentifier: 
   representation: {fileID: 0}
   traits:
-  - name: Running
+  - name: size
+    factor: 2.5
+  - name: lifetime
+    factor: 30
+  - name: wanderdistance
+    factor: 3
+  - name: thinkingtime
+    factor: 12
+  - name: speed
+    factor: 0.25
+  - name: eating
+    factor: 2
+  - name: flying
     factor: 0

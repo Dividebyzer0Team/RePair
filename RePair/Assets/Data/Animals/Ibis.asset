@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72be9affe506ef04ab45295975883f85, type: 3}
-  m_Name: Tiger
+  m_Name: Ibis
   m_EditorClassIdentifier: 
   genes:
-  - {fileID: 11400000, guid: a0cc7aa04a8184a0fbf9de82287699af, type: 2}
-  - {fileID: 11400000, guid: a0cc7aa04a8184a0fbf9de82287699af, type: 2}
-  - {fileID: 11400000, guid: a0cc7aa04a8184a0fbf9de82287699af, type: 2}
+  - {fileID: 11400000, guid: 69b41ef8014e72e41b36c1124c2443a6, type: 2}
+  - {fileID: 11400000, guid: cccd72e847e515544b717bcd8ae5c73b, type: 2}
+  - {fileID: 11400000, guid: c5a87362c2789fa41928cef893d6ffc4, type: 2}
+  - {fileID: 11400000, guid: 748981fc9b2224645bb7848a06614918, type: 2}

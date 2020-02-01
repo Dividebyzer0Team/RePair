@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Elefant
   m_EditorClassIdentifier: Assembly-CSharp::AnimalPreset
   genes:
+  - {fileID: 11400000, guid: 8f854d9932cbb1a44baeedc0b81ea4d6, type: 2}
   - {fileID: 11400000, guid: 917684c150e2b4918a765c35a4f243b1, type: 2}
-  - {fileID: 11400000, guid: 917684c150e2b4918a765c35a4f243b1, type: 2}
-  - {fileID: 11400000, guid: 917684c150e2b4918a765c35a4f243b1, type: 2}
+  - {fileID: 11400000, guid: b011a7102cc9829419acc0e422cd78af, type: 2}

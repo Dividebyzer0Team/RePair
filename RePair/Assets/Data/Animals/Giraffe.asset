@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72be9affe506ef04ab45295975883f85, type: 3}
-  m_Name: Elephant
+  m_Name: Giraffe
   m_EditorClassIdentifier: 
   genes:
-  - {fileID: 11400000, guid: 4a648677536d4f54cb396b29b7863e3a, type: 2}
-  - {fileID: 11400000, guid: 427804c3b08dfbc44ac1640b13e87121, type: 2}
-  - {fileID: 11400000, guid: 8a2dbc1a92192b14eb9e938fc3a9a07a, type: 2}
+  - {fileID: 11400000, guid: b27c1baf5e5fabe41965b0684b008768, type: 2}
+  - {fileID: 11400000, guid: a0cc7aa04a8184a0fbf9de82287699af, type: 2}
+  - {fileID: 11400000, guid: f8993965ab18c7c4aba9b8e8e003a1bb, type: 2}

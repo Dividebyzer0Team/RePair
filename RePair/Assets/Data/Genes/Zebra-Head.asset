@@ -10,15 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
-  m_Name: Elefant-Body
+  m_Name: Zebra-Head
   m_EditorClassIdentifier: 
   representation: {fileID: 0}
   traits:
   - name: size
-    factor: 3
-  - name: wanderDistance
-    factor: 2
-  - name: thinkingTime
-    factor: 10
+    factor: 1.5
+  - name: lifetime
+    factor: 20
+  - name: wanderdistance
+    factor: 6
+  - name: thinkingtime
+    factor: 4
   - name: speed
-    factor: 0.4
+    factor: 3
+  - name: eating
+    factor: 4
+  - name: flying
+    factor: 0

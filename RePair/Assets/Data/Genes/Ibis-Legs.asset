@@ -10,11 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
-  m_Name: ElephantHead
+  m_Name: Ibis-Legs
   m_EditorClassIdentifier: 
   representation: {fileID: 0}
   traits:
-  - name: Herbivorous
+  - name: size
+    factor: 0.9
+  - name: lifetime
+    factor: 15
+  - name: wanderdistance
+    factor: 6
+  - name: thinkingtime
     factor: 0
-  - name: Waving
+  - name: speed
+    factor: 1
+  - name: eating
+    factor: 1
+  - name: flying
     factor: 0
