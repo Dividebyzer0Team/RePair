@@ -1,0 +1,13 @@
+
+goose_head.png
+size: 496,453
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+goose-head
+  rotate: false
+  xy: 2, 2
+  size: 492, 449
+  orig: 492, 449
+  offset: 0, 0
+  index: -1

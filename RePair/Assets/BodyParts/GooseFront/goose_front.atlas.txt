@@ -1,0 +1,20 @@
+
+goose_front.png
+size: 513,635
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+goose-frontbody
+  rotate: false
+  xy: 2, 248
+  size: 385, 385
+  orig: 385, 385
+  offset: 0, 0
+  index: -1
+goose-wing
+  rotate: false
+  xy: 2, 2
+  size: 509, 244
+  orig: 509, 244
+  offset: 0, 0
+  index: -1
