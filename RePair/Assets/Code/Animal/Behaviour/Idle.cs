@@ -19,7 +19,7 @@ public class Idle : Behaviour
 
     public override void Start()
     {
-        m_idleTime = m_host.GetTrait("thinkingTime") * Random.Range(0.5f, 1.5f);
+        m_idleTime = m_host.GetTrait("thinkingTime") * Random.Range(0.9f, 1.1f);
         m_started = true;
     }
 
