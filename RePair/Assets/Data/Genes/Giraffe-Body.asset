@@ -18,12 +18,12 @@ MonoBehaviour:
     factor: 2
   - name: lifetime
     factor: 25
-  - name: wanderdistance
-    factor: 3
-  - name: thinkingtime
+  - name: wanderDistance
+    factor: 12
+  - name: thinkingTime
     factor: 0
   - name: speed
-    factor: 2
+    factor: 1
   - name: eating
     factor: 3
   - name: flying

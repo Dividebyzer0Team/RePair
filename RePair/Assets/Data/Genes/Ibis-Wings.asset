@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   representation: {fileID: 0}
   traits:
-  - name: flight
+  - name: flying
     factor: 5
   - name: speed
-    factor: 6
+    factor: 3
