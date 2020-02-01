@@ -58,26 +58,26 @@ public class Genome
 	{
 		var allTraits = new Dictionary <string, float> ();
 
-		void sumTraits(Gene gene)
+		foreach (var gene in m_genes)
 		{
 			foreach (var trait in gene.traits)
 			{
 				if (allTraits.ContainsKey(trait.name))
 				{
-					allTraits[trait.name] += trait.factor / 3; //dirty hack
+					allTraits[trait.name] += trait.factor;
 				}
 				else
 				{
-					allTraits[trait.name] = trait.factor / 3; //dirty hack
-                }
+					allTraits[trait.name] = trait.factor;
+				}
 			}
 		}
-
-		foreach (var gene in m_genes)
+		// simply dividing summed traits by 3 for now
+		foreach (var kv in allTraits)
 		{
-			sumTraits(gene);
+			allTraits[kv.Key] = kv.Value / 3;
 		}
 
-        return allTraits;
+		return allTraits;
 	}
 }
