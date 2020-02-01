@@ -15,16 +15,16 @@ MonoBehaviour:
   representation: {fileID: 0}
   traits:
   - name: size
-    factor: 0.9
+    factor: 0.3
   - name: lifetime
-    factor: 15
+    factor: 5
   - name: wanderDistance
-    factor: 48
+    factor: 16
   - name: thinkingTime
     factor: 0
   - name: speed
-    factor: 2
+    factor: 0.66
   - name: eating
-    factor: 1
+    factor: 0.33
   - name: flying
     factor: 0

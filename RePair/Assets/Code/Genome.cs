@@ -77,7 +77,7 @@ public class Genome
 		var keys = new List <string> (allTraits.Keys);
 		foreach (var k in keys)
 		{
-			allTraits[k] = allTraits[k] / 3;
+			allTraits[k] = allTraits[k];
 		}
 
 		return allTraits;

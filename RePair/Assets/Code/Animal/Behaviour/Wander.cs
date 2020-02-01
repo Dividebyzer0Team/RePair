@@ -26,10 +26,24 @@ public class Wander : Behaviour
     public override void Start()
     {
         Vector2 wanderDirection = Random.value > 0.5 ? Vector2.left : Vector2.right;
-        float hostSize = m_host.transform.localScale.x;
+
+        float hostSize = m_host.GetTrait("size");
+        float flyingHeight = m_host.GetTrait("flyingHeight");
+
         float wanderDistance = Random.Range(hostSize, hostSize * m_host.GetTrait("wanderDistance"));
-        m_wanderTime = wanderDistance / m_host.GetTrait("speed");
-        m_wanderPosition = (Vector2)m_host.transform.position + wanderDirection * wanderDistance;
+        Vector2 wanderVector = wanderDirection * wanderDistance;
+        if (flyingHeight > 0)
+        {
+            Debug.Log(flyingHeight);
+            float targetHeightOffset = Random.Range(-hostSize, hostSize);
+
+            float targetHeight = flyingHeight + targetHeightOffset;
+            Debug.Log(targetHeight);
+            float verticalDirection = targetHeight - m_host.transform.position.y;
+            wanderVector.y = verticalDirection;
+        }
+        m_wanderPosition = (Vector2)m_host.transform.position + wanderVector;
+        m_wanderTime = wanderVector.magnitude / m_host.GetTrait("speed");
         m_started = true;
     }
 

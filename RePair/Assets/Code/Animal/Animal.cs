@@ -48,9 +48,17 @@ public class Animal : MonoBehaviour
     {
         m_traits = m_genome.GetAllTraits();
         m_traits["age"] = 0f;
+        float canFly = GetTrait("flying") - GetTrait("size");
+        if (canFly > 0)
+        {
+            m_traits["flyingHeight"] = canFly * 5f;
+            m_movementMethod = MovementMethod.FLY;
+            m_rigidbody.gravityScale = 0f;
+        }
         var size = GetTrait("size");
 				transform.localScale = new Vector3(size, size, 1f);
         Invoke("Die", GetTrait("lifetime"));
+
     }
 
     void Die()
@@ -61,8 +69,6 @@ public class Animal : MonoBehaviour
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
-
-        // ТЕСТОВОЕ
         if (preset != null)
             InitFromPreset();
         Idle();
@@ -82,16 +88,17 @@ public class Animal : MonoBehaviour
 
     public void Move(Vector3 position)
     {
-        if (m_movementMethod == MovementMethod.WALK || m_movementMethod == MovementMethod.FLY)
+        float time = Time.fixedDeltaTime;
+        float speed = GetTrait("speed");
+        if (m_movementMethod == MovementMethod.WALK)
         {
-            m_state = "walk"; // Когда-то здесь будет еще и fly/jump (вероятно)
-            float time = Time.fixedDeltaTime;
-            float speed = GetTrait("speed");
-            m_rigidbody.velocity = (position - transform.position).normalized * speed;
+            m_state = "walk"; 
+            m_rigidbody.velocity = new Vector2(Mathf.Sign(position.x - transform.position.x) * speed, m_rigidbody.velocity.y);
         }
-        if (m_movementMethod == MovementMethod.JUMP)
+        if (m_movementMethod == MovementMethod.FLY)
         {
-
+            m_state = "fly"; 
+            m_rigidbody.velocity = (position - transform.position).normalized * speed;
         }
     }
 

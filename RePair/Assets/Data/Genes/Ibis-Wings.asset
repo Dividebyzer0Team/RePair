@@ -15,6 +15,6 @@ MonoBehaviour:
   representation: {fileID: 0}
   traits:
   - name: flying
-    factor: 5
+    factor: 1.66
   - name: speed
-    factor: 3
+    factor: 1
