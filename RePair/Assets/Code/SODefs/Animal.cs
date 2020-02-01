@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Animal", menuName = "RePair/Animal", order = 10)]
-public class Animal : ScriptableObject
+[CreateAssetMenu(fileName = "AnimalPreset", menuName = "RePair/Animal", order = 10)]
+public class AnimalPreset : ScriptableObject
 {
 	public List <Gene> genes;
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Animal : MonoBehaviour
 {
+    Genome m_genome;
     string m_state; // Строка со стейтом спайна для анимирования
     Dictionary<string, float> m_traits;
     Animator mAnimator; // Класс для анимирования. Если кастомный - надо правильный сделать будет
@@ -10,8 +11,21 @@ public class Animal : MonoBehaviour
     Rigidbody2D m_rigidbody;
     Behaviour m_behaviour;
 
-    //TEMP
-    GameObject m_target;
+    // ТЕСТОВОЕ
+    public AnimalPreset preset;
+    enum MovementMethod
+    {
+        WALK,
+        JUMP,
+        FLY
+    }
+    MovementMethod m_movementMethod = MovementMethod.WALK;
+    // ТЕСТОВОЕ
+
+    private void InitFromPreset()
+    {
+         
+    }
 
     void Awake()
     {
@@ -21,17 +35,21 @@ public class Animal : MonoBehaviour
                 { "thinkingTime" , 2f },
                 { "wanderDistance" , 5f }
             };
-        m_target = GameObject.Find("Target");
+
         Idle();
+
+
+        // ТЕСТОВОЕ
         Color[] randomColors = new Color[] { Color.blue, Color.green, Color.red, Color.yellow };
         Color color = randomColors[Random.Range(0, 4)];
         GetComponent<MeshRenderer>().material.color = color;
+
     }
 
     void FixedUpdate()
 	{
-        m_behaviour.Update(Time.deltaTime);
-	}
+        m_behaviour.Update(Time.fixedDeltaTime);
+    }
 
     public float GetTrait(string traitName)
     {
@@ -41,10 +59,17 @@ public class Animal : MonoBehaviour
 
     public void Move(Vector3 position)
     {
-        m_state = "walk"; // Когда-то здесь будет еще и fly/jump (вероятно)
-        float time = Time.fixedDeltaTime;
-        float speed = GetTrait("speed");
-        m_rigidbody.velocity = (position - transform.position).normalized * speed;
+        if (m_movementMethod == MovementMethod.WALK || m_movementMethod == MovementMethod.FLY)
+        {
+            m_state = "walk"; // Когда-то здесь будет еще и fly/jump (вероятно)
+            float time = Time.fixedDeltaTime;
+            float speed = GetTrait("speed");
+            m_rigidbody.velocity = (position - transform.position).normalized * speed;
+        }
+        if (m_movementMethod == MovementMethod.JUMP)
+        {
+
+        }
     }
 
     public void OnActionStop()
@@ -64,6 +89,7 @@ public class Animal : MonoBehaviour
     {
         m_state = "idle"; // Тут будем рассказывать спайну, что начали стоять тупить
         m_behaviour = new Idle(this);
+        //m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y); //Пока что обнуляем горзонтальную скорость
     }
 
     public void Decide()
@@ -88,5 +114,10 @@ public class Animal : MonoBehaviour
         Color c2 = other.GetComponent<MeshRenderer>().material.color;
         newAnimal.GetComponent<MeshRenderer>().material.color = new Color((c1.r + c2.r) * 0.5f, (c1.g + c2.g) * 0.5f, (c1.b + c2.b) * 0.5f);
         //creation of new animal
+    }
+
+    public Rigidbody2D GetRigidbody()
+    {
+        return m_rigidbody;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class AnimalTest : MonoBehaviour
 {
-	public Animal animal;
+	public AnimalPreset animal;
 
 	private Genome m_genome;
 	private Text m_text;
