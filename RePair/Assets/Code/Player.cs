@@ -27,8 +27,9 @@ public class Player : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
-			var arrowGO = GameObject.Instantiate(arrow);
-			var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            var arrowGO = GameObject.Instantiate(arrow);
+            arrow.transform.position = transform.position;
 			var arrowRB = arrowGO.GetComponent <Rigidbody2D> ();
 			arrowRB.AddForce(dir * (arrowForceFactor + m_shotCharge), ForceMode2D.Impulse);
 			m_shotCharge = m_shotChargeTime = 0;
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
 		else if (animal != m_queuedAnimal) // cannot select same animal twice
 		{
 			m_queuedAnimal.OrderMeet(animal);
-			animal.OrderMeet(animal);
+			animal.OrderMeet(m_queuedAnimal);
 			m_queuedAnimal = null;
 		}
 	}
