@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
 			{
 				Instantiate(matingReadyEffect, animal.transform);
 				m_queuedAnimal.OrderMeet(animal);
-				m_queuedAnimal.gameObject.AddComponent<LineRenderer>();
+				//m_queuedAnimal.gameObject.AddComponent<LineRenderer>();
 				animal.OrderMeet(m_queuedAnimal);
 				m_queuedAnimal = null;
 			}
