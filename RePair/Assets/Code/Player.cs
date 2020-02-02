@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
 	public GameObject loveArrowPrefab;
 	public GameObject warArrowPrefab;
+	public GameObject matingReadyEffect;
 	public float arrowForceFactor = 1.0f;
 	public float chargeForceFactor = 1.0f;
 	public float chargeMaxTime = 1.5f;
@@ -86,24 +87,25 @@ public class Player : MonoBehaviour
 
 	void OnAnimalHit(Animal animal, Arrow.WhatToMake whatToMake)
 	{
-        if (whatToMake == Arrow.WhatToMake.LOVE)
-        {
-            if (!m_queuedAnimal || m_queuedAnimal.IsDead())
-            {
-                m_queuedAnimal = animal;
-            }
-            else if (animal != m_queuedAnimal) // cannot select same animal twice
-            {
-                m_queuedAnimal.OrderMeet(animal);
-								m_queuedAnimal.gameObject.AddComponent<LineRenderer>();
-                animal.OrderMeet(m_queuedAnimal);
-                m_queuedAnimal = null;
-            }
-        }
-        else
-        {
-            animal.Die();
-        }
-
-    }
+		if (whatToMake == Arrow.WhatToMake.LOVE)
+		{
+			if (!m_queuedAnimal || m_queuedAnimal.IsDead())
+			{
+				m_queuedAnimal = animal;
+				Instantiate(matingReadyEffect, m_queuedAnimal.transform);
+			}
+			else if (animal != m_queuedAnimal) // cannot select same animal twice
+			{
+				Instantiate(matingReadyEffect, animal.transform);
+				m_queuedAnimal.OrderMeet(animal);
+				m_queuedAnimal.gameObject.AddComponent<LineRenderer>();
+				animal.OrderMeet(m_queuedAnimal);
+				m_queuedAnimal = null;
+			}
+		}
+		else
+		{
+			animal.Die();
+		}
+	}
 }

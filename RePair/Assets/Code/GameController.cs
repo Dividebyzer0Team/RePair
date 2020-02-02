@@ -4,12 +4,13 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour
 {
   public GameObject animalBase;
-  public float animalHungerFactor = 1.0f;
+	public GameObject gameBounds;
+	public GameObject matingEffect;
+	public float animalHungerFactor = 1.0f;
   public float animalFeedingFactor = 1.0f;
   public float animalRunningDirectionRandomizeInterval = 0.25f;
   public bool gameStarted;
-  public GameObject gameBounds;
-
+  
   public List<GameObject> animals;
   [System.Serializable]
   public struct AnimalSpawn

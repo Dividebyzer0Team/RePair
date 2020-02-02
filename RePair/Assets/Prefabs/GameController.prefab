@@ -47,13 +47,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalBase: {fileID: 6854697312382403930, guid: 3b8aebb2fa0834cf9a0ff7077d02f046,
     type: 3}
+  gameBounds: {fileID: 8981288774581058677}
+  matingEffect: {fileID: 5402025018352033208, guid: 65d2d5b522803e7488e56cb067df373e,
+    type: 3}
   animalHungerFactor: 1
   animalFeedingFactor: 5
   animalRunningDirectionRandomizeInterval: 0.25
-  gameStarted: 0
-  gameBounds: {fileID: 8981288774581058677}
+  gameStarted: 1
   animals: []
-  spawns: []
+  spawns:
+  - prefab: {fileID: 8358506345254341901, guid: 638f57889deb441a8b0f893823fc5fe2,
+      type: 3}
+    amount: 3
+  - prefab: {fileID: 575454929241986541, guid: b7b5a4e9b05f047e28429980a3a556d3, type: 3}
+    amount: 4
+  - prefab: {fileID: 294861935006992158, guid: c394837a72c1d304682f79694727f849, type: 3}
+    amount: 6
+  - prefab: {fileID: 8000831870179410676, guid: 839d94efac6194794ad96a7003d7c9dd,
+      type: 3}
+    amount: 4
+  - prefab: {fileID: 1242454914833189371, guid: 55c6ff4757adb4951bf0148ae9bbd2c4,
+      type: 3}
+    amount: 4
+  - prefab: {fileID: 830421892591766856, guid: 9343ffb22af8e9247aaa3692f6e83d79, type: 3}
+    amount: 5
 --- !u!114 &7923587743068817170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,8 +83,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9f75b02f17f8b4d9a4edf734743ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min: -80
-  max: 80
+  min: 30
+  max: 30
   changeInterval: 12
 --- !u!1 &8981288774581058677
 GameObject:

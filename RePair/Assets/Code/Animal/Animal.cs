@@ -224,10 +224,20 @@ public class Animal : MonoBehaviour
 
 	public void Mate(Animal other)
 	{
+		// destroying mating-ready effects
+		var matingReadyEffect = transform.Find("FX_heart(Clone)");
+		if (matingReadyEffect) Destroy(matingReadyEffect.gameObject);
+		matingReadyEffect = other.transform.Find("FX_heart(Clone)");
+		if (matingReadyEffect) Destroy(matingReadyEffect.gameObject);
+
+		// spawning mating effect
+		var matingEffectPos = transform.position + (other.transform.position - transform.position) / 2;
+		Instantiate(GameController.GetInstance().matingEffect, matingEffectPos, Quaternion.identity);
+
 		other.Idle();
-		GameObject newAnimalGO = Instantiate(GameController.GetInstance().animalBase);	 
+		GameObject newAnimalGO = Instantiate(GameController.GetInstance().animalBase);
 		newAnimalGO.transform.position = (transform.position + other.transform.position) / 2;
-		Animal newAnimal = newAnimalGO.GetComponent<Animal>();
+		Animal newAnimal = newAnimalGO.GetComponent <Animal> ();
 		newAnimal.Inherit(this, other);
 		PushParent(other, newAnimal);
 		PushParent(this, newAnimal);
