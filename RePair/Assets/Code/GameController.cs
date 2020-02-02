@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
   {
 	GameController.instance = this;
 	animals = new List<GameObject>();
-	StartGame();
+	SpawnAnimals();
   }
 
   public void Genocide()
@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
 		animals.Clear();
   }
 
-  public void StartGame()
+  public void SpawnAnimals()
   {
 		gameStarted = true;
 		foreach (AnimalSpawn spawn in spawns)
@@ -52,6 +52,11 @@ public class GameController : MonoBehaviour
 				animalGO.transform.position = new Vector2(Random.Range(-gameBounds.transform.localScale.x / 2, gameBounds.transform.localScale.x / 2), 0);
 		  }
 		}
+  }
+
+	public void StartGame()
+  {
+		gameStarted = true;
   }
 
   public void EndGame()
