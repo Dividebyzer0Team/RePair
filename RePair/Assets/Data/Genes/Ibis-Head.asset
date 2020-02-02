@@ -19,7 +19,7 @@ MonoBehaviour:
   - name: size
     factor: 0.5
   - name: lifetime
-    factor: 15
+    factor: 30
   - name: wanderDistance
     factor: 16
   - name: thinkingTime
