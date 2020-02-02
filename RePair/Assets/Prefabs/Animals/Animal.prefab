@@ -377,6 +377,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5185209481009063313, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5185209481009063314, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
       propertyPath: m_Mesh
