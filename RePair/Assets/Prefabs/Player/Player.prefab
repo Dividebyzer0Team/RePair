@@ -100,9 +100,11 @@ MonoBehaviour:
     type: 3}
   warArrowPrefab: {fileID: 565218867683922080, guid: dd258c58c54d543d48bfaca2fd50fecd,
     type: 3}
+  arrowChargeEffect: {fileID: 5101937647448066516, guid: 4e896a78f88f5df468e6d8ec9aa0f831,
+    type: 3}
   matingReadyEffect: {fileID: 323350617157256192, guid: baf7422e92d095d43b42f03f3d87559f,
     type: 3}
-  arrowForceFactor: 5
+  arrowForceFactor: 1
   chargeForceFactor: 5
   chargeMaxTime: 1.5
   debugBreeding: 0
