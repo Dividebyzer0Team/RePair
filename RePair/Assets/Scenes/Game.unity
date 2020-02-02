@@ -7186,7 +7186,7 @@ PrefabInstance:
     - target: {fileID: 856422149561662862, guid: e1493bb5036bf5940aa5eee80cab24ca,
         type: 3}
       propertyPath: spawns.Array.data[3].amount
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 856422149561662862, guid: e1493bb5036bf5940aa5eee80cab24ca,
         type: 3}
@@ -7201,7 +7201,7 @@ PrefabInstance:
     - target: {fileID: 856422149561662862, guid: e1493bb5036bf5940aa5eee80cab24ca,
         type: 3}
       propertyPath: gameStarted
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 856422149561662863, guid: e1493bb5036bf5940aa5eee80cab24ca,
         type: 3}
