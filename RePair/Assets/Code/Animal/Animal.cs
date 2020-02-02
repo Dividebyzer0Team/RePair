@@ -1,177 +1,178 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Animal : MonoBehaviour
 {
-    public GameObject childPrefab;
+	public AnimalPreset preset;
 
-    Genome m_genome;
-    string m_state; // Строка со стейтом спайна для анимирования
-    Dictionary<string, float> m_traits;
-    Rigidbody2D m_rigidbody;
-    Behaviour m_behaviour;
-    SkeletonController m_view;
-    bool m_orientation = true; // true = left
-    // ТЕСТОВОЕ
-    public AnimalPreset preset;
-    enum MovementMethod
-    {
-        WALK,
-        JUMP,
-        FLY
-    }
+	GameObject m_animalBase;
+	Genome m_genome;
+	string m_state; // Строка со стейтом спайна для анимирования
+	Dictionary<string, float> m_traits;
+	Rigidbody2D m_rigidbody;
+	Behaviour m_behaviour;
+	SkeletonController m_view;
+	bool m_orientation = true; // true = left
 
-    MovementMethod m_movementMethod = MovementMethod.WALK;
-    // ТЕСТОВОЕ
-
-    public Genome GetGenome()
-    {
-        return m_genome;
-    }
-
-    private void InitFromPreset()
-    {
-        m_genome = new Genome(preset.genes);
-        InitAnimal();
-    }
-
-    public void Inherit(Animal parent1, Animal parent2)
-    {
-        m_genome = Genome.Breed(parent1.GetGenome(), parent2.GetGenome());
-        InitAnimal();
-
-    }
-
-    private void InitAnimal()
-    {
-        Debug.Log("InitAnimal");
-        m_traits = m_genome.GetAllTraits();
-        m_traits["age"] = 0f;
-        float canFly = GetTrait("flying") - GetTrait("size");
-        if (canFly > 0)
-        {
-            m_traits["flyingHeight"] = canFly * 5f;
-            m_movementMethod = MovementMethod.FLY;
-            m_rigidbody.gravityScale = 0f;
-        }
-
-        Invoke("Die", GetTrait("lifetime"));
-        float size = GetTrait("size");
-        GameObject legsGO = GameObject.Instantiate(m_genome.Legs.representation, m_view.transform);
-        legsGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-        GameObject bodyGO = GameObject.Instantiate(m_genome.Body.representation, legsGO.transform);
-        bodyGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-        GameObject headGO = GameObject.Instantiate(m_genome.Head.representation, bodyGO.transform);
-        headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-        transform.localScale = new Vector3(size, size, 1f);
-
-    }
-
-
-    void Die()
-    {
-        Destroy(this.gameObject);
-    }
-
-    void Awake()
-    {
-        m_view = GetComponentInChildren<SkeletonController>();
-        m_rigidbody = GetComponent<Rigidbody2D>();
-        if (preset != null)
-            InitFromPreset();
-        Idle();
-    }
-
-    void FixedUpdate()
+	enum MovementMethod
 	{
-        m_behaviour.Update(Time.fixedDeltaTime);
-        m_traits["age"] += Time.fixedDeltaTime;
-    }
+		WALK,
+		JUMP,
+		FLY
+	}
 
-    public float GetTrait(string traitName)
-    {
-        if (!m_traits.ContainsKey(traitName)) return 0f;
-        return m_traits[traitName];
-    }
+	MovementMethod m_movementMethod = MovementMethod.WALK;
+	// ТЕСТОВОЕ
 
-    public void SetOrientation(bool orientation)
-    {
-        if (m_orientation != orientation)
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        m_orientation = orientation;
-    }
+	public Genome GetGenome()
+	{
+		return m_genome;
+	}
 
-    public void Move(Vector3 position)
-    {
-        float time = Time.fixedDeltaTime;
-        float speed = GetTrait("speed");
-        if (m_movementMethod == MovementMethod.WALK)
-        {
-            SetState("walk");
-            m_rigidbody.velocity = new Vector2(Mathf.Sign(position.x - transform.position.x) * speed, m_rigidbody.velocity.y);
+	private void InitFromPreset()
+	{
+		m_genome = new Genome(preset.genes);
+		InitAnimal();
+	}
 
-        }
-        if (m_movementMethod == MovementMethod.FLY)
-        {
-            SetState("fly");
-            m_rigidbody.velocity = (position - transform.position).normalized * speed;
-        }
-        SetOrientation(m_rigidbody.velocity.x > 0);
-    }
+	public void Inherit(Animal parent1, Animal parent2)
+	{
+		m_genome = Genome.Breed(parent1.GetGenome(), parent2.GetGenome());
+		InitAnimal();
 
-    public void OnActionStop()
-    {
-        if (m_behaviour is Idle)
-            Decide();
-        else
-            Idle();
-    }
+	}
 
-    public Behaviour GetBehaviour()
-    {
-        return m_behaviour;
-    }
+	private void InitAnimal()
+	{
+		Debug.Log("InitAnimal");
+		m_traits = m_genome.GetAllTraits();
+		m_traits["age"] = 0f;
+		float canFly = GetTrait("flying") - GetTrait("size");
+		if (canFly > 0)
+		{
+			m_traits["flyingHeight"] = canFly * 5f;
+			m_movementMethod = MovementMethod.FLY;
+			m_rigidbody.gravityScale = 0f;
+		}
 
-    void SetState(string state)
-    {
-        if (m_state == state)
-            return;
-        m_state = state;
-        m_view.SwitchAnimationState(m_state);
-    }
+		Invoke("Die", GetTrait("lifetime"));
+		float size = GetTrait("size");
+		GameObject legsGO = GameObject.Instantiate(m_genome.Legs.representation, m_view.transform);
+		legsGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+		GameObject bodyGO = GameObject.Instantiate(m_genome.Body.representation, legsGO.transform);
+		bodyGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+		GameObject headGO = GameObject.Instantiate(m_genome.Head.representation, bodyGO.transform);
+		headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+		transform.localScale = new Vector3(size, size, 1f);
 
-    public void Idle()
-    {
-        SetState("idle");
-        m_behaviour = new Idle(this);
-        //m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y); //Пока что обнуляем горзонтальную скорость
-    }
+	}
 
-    public void Decide()
-    {
-        m_behaviour = new Wander(this);
-    }
 
-    public void OrderMeet(Animal other)
-    {
-        m_behaviour = new Meet(this, other);
-    }
+	void Die()
+	{
+		Destroy(this.gameObject);
+	}
 
-    public void Mate(Animal other)
-    {
-        Idle();
-        other.Idle();
-        GameObject newAnimalGO = Instantiate(childPrefab);
-        newAnimalGO.transform.position = (this.transform.position + other.transform.position) / 2;
-        Animal newAnimal = newAnimalGO.GetComponent<Animal>();
-        newAnimal.Inherit(this, other);
+	void Awake()
+	{
+		m_animalBase = GameObject.Find("GameController").GetComponent<GameController>().animalBase;
+		m_view = GetComponentInChildren<SkeletonController>();
+		m_rigidbody = GetComponent<Rigidbody2D>();
+		if (preset != null)
+			InitFromPreset();
+		Idle();
+	}
 
-        //Временно красим животных
-       
-    }
+	void FixedUpdate()
+	{
+		m_behaviour.Update(Time.fixedDeltaTime);
+		m_traits["age"] += Time.fixedDeltaTime;
+	}
 
-    public Rigidbody2D GetRigidbody()
-    {
-        return m_rigidbody;
-    }
+	public float GetTrait(string traitName)
+	{
+		if (!m_traits.ContainsKey(traitName)) return 0f;
+		return m_traits[traitName];
+	}
+
+	public void SetOrientation(bool orientation)
+	{
+		if (m_orientation != orientation)
+			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		m_orientation = orientation;
+	}
+
+	public void Move(Vector3 position)
+	{
+		float time = Time.fixedDeltaTime;
+		float speed = GetTrait("speed");
+		if (m_movementMethod == MovementMethod.WALK)
+		{
+			SetState("walk");
+			m_rigidbody.velocity = new Vector2(Mathf.Sign(position.x - transform.position.x) * speed, m_rigidbody.velocity.y);
+
+		}
+		if (m_movementMethod == MovementMethod.FLY)
+		{
+			SetState("fly");
+			m_rigidbody.velocity = (position - transform.position).normalized * speed;
+		}
+		SetOrientation(m_rigidbody.velocity.x > 0);
+	}
+
+	public void OnActionStop()
+	{
+		if (m_behaviour is Idle)
+			Decide();
+		else
+			Idle();
+	}
+
+	public Behaviour GetBehaviour()
+	{
+		return m_behaviour;
+	}
+
+	void SetState(string state)
+	{
+		if (m_state == state)
+			return;
+		m_state = state;
+		m_view.SwitchAnimationState(m_state);
+	}
+
+	public void Idle()
+	{
+		SetState("idle");
+		m_behaviour = new Idle(this);
+		//m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y); //Пока что обнуляем горзонтальную скорость
+	}
+
+	public void Decide()
+	{
+		m_behaviour = new Wander(this);
+	}
+
+	public void OrderMeet(Animal other)
+	{
+		m_behaviour = new Meet(this, other);
+	}
+
+	public void Mate(Animal other)
+	{
+		Idle();
+		other.Idle();
+		GameObject newAnimalGO = Instantiate(m_animalBase);
+		newAnimalGO.transform.position = (this.transform.position + other.transform.position) / 2;
+		Animal newAnimal = newAnimalGO.GetComponent<Animal>();
+		newAnimal.Inherit(this, other);
+
+		//Временно красим животных
+
+	}
+
+	public Rigidbody2D GetRigidbody()
+	{
+		return m_rigidbody;
+	}
 }
