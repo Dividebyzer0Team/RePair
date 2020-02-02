@@ -163,15 +163,19 @@ public class Animal : MonoBehaviour
 	public void Mate(Animal other)
 	{
         other.Idle();
-        GameObject newAnimalGO = Instantiate(GameController.GetInstance().animalBase);
-      
+        GameObject newAnimalGO = Instantiate(GameController.GetInstance().animalBase);   
         newAnimalGO.transform.position = (transform.position + other.transform.position) / 2;
-        GetRigidbody().velocity = Vector2.zero;
-        other.GetRigidbody().velocity = Vector2.zero;
-        GetRigidbody().AddForce(((transform.position - newAnimalGO.transform.position).normalized + Vector3.up) * 300f);
-        other.GetRigidbody().AddForce(((other.transform.position - newAnimalGO.transform.position).normalized + Vector3.up) * 300f);Animal newAnimal = newAnimalGO.GetComponent<Animal>();
+        Animal newAnimal = newAnimalGO.GetComponent<Animal>();
         newAnimal.Inherit(this, other);
+        PushParent(other, newAnimal);
+        PushParent(this, newAnimal);
+    }
 
+    public void PushParent(Animal parent, Animal child)
+    {
+        parent.GetRigidbody().velocity = Vector2.zero;
+        Vector3 force = new Vector2(Mathf.Sign(parent.transform.position.x - child.transform.position.x), 1f) * 100f;
+        parent.GetRigidbody().AddForce(force);
     }
 
     public Rigidbody2D GetRigidbody()
