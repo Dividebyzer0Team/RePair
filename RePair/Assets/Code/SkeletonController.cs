@@ -59,4 +59,12 @@ public class SkeletonController : MonoBehaviour
             return;
         }
     }
+ 
+    void Start()
+    {
+        // test
+        // SetBodyPart(null, "Zebra");
+        // SwitchAnimationState("idle");
+        // SetBodyPart("Rear", "Goose");
+    }
 }

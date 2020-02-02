@@ -16,10 +16,16 @@ public class SkeletonPartController : MonoBehaviour
  
     public void SetSkeleton(SkeletonDataAsset newSkeleton)
     {
-        skeleton = newSkeleton;
         SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
         if (skeletonAnimation != null) {
-            skeletonAnimation.skeleton = new Skeleton(newSkeleton.GetSkeletonData(false ));
+            string anim = skeletonAnimation.AnimationName;
+            skeletonAnimation.ClearState();
+
+            skeletonAnimation.skeletonDataAsset = newSkeleton;
+            skeletonAnimation.Initialize(true);
+
+            skeleton = newSkeleton;
+            skeletonAnimation.AnimationName = anim;
         }
     }
  
@@ -37,7 +43,7 @@ public class SkeletonPartController : MonoBehaviour
     {
         SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
         if (skeletonAnimation != null) {
-            skeletonAnimation.state.SetAnimation(0, anim, true);
+            skeletonAnimation.AnimationName = anim;
         }
     }
 
