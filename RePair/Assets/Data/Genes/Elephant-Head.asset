@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
-  m_Name: Elefant-Legs
+  m_Name: Elephant-Head
   m_EditorClassIdentifier: 
   representation: {fileID: 0}
   traits:
@@ -21,9 +21,9 @@ MonoBehaviour:
   - name: wanderDistance
     factor: 4
   - name: thinkingTime
-    factor: 0
+    factor: 4
   - name: speed
-    factor: 1
+    factor: 0.33
   - name: eating
     factor: 0.66
   - name: flying

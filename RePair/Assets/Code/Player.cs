@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -27,9 +26,8 @@ public class Player : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
-            var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-            var arrowGO = GameObject.Instantiate(arrow);
-            arrow.transform.position = transform.position;
+			var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+			var arrowGO = GameObject.Instantiate(arrow, transform, true);
 			var arrowRB = arrowGO.GetComponent <Rigidbody2D> ();
 			arrowRB.AddForce(dir * (arrowForceFactor + m_shotCharge), ForceMode2D.Impulse);
 			m_shotCharge = m_shotChargeTime = 0;

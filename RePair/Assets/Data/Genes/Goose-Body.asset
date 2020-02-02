@@ -29,3 +29,5 @@ MonoBehaviour:
     factor: 0.33
   - name: flying
     factor: 2
+  - name: stomachSize
+    factor: 2
