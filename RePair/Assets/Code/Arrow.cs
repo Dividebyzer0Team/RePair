@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-	public delegate void OnCollisionWithAnimalHandler(Animal animal);
+    public enum WhatToMake
+    {
+        LOVE,
+        WAR
+    }
+    public WhatToMake whatToMake;
+    public delegate void OnCollisionWithAnimalHandler(Animal animal, WhatToMake whatToMake);
 	public OnCollisionWithAnimalHandler OnCollisionWithAnimal;
 
 	private Rigidbody2D m_rigidbody;
@@ -21,7 +27,7 @@ public class Arrow : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		var animal = collision.transform.GetComponent <Animal> ();
-		if (animal) OnCollisionWithAnimal(animal);
+		if (animal) OnCollisionWithAnimal(animal, whatToMake);
 		Destroy(gameObject);
 	}
 }

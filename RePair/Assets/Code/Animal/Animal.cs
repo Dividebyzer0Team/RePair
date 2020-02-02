@@ -76,7 +76,7 @@ public class Animal : MonoBehaviour
         return m_dead;
     }
 
-    void Die()
+    public void Die()
 	{
         m_rigidbody.velocity = Vector2.zero;
         m_dead = true;
@@ -126,6 +126,8 @@ public class Animal : MonoBehaviour
             return;
         if (m_behaviour != null) m_behaviour.Update(Time.fixedDeltaTime);
         m_orientation = Mathf.Sign(-m_rigidbody.velocity.x);
+        if (m_orientation == 0f)
+            m_orientation = 1f;
         ManageAge(Time.fixedDeltaTime);
 		// hunger
 		if (m_traits.ContainsKey("stomachSize"))

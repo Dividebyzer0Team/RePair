@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	public GameObject arrow;
-	public float arrowForceFactor = 1.0f;
+	public GameObject loveArrowPrefab;
+    public GameObject warArrowPrefab;
+    public float arrowForceFactor = 1.0f;
 	public float chargeForceFactor = 1.0f;
 	public float chargeMaxTime = 1.5f;
 	public bool debugBreeding = false;
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
 	{
 		if (debugBreeding)
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 			{
 				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 				if (hit.collider != null)
@@ -32,14 +33,14 @@ public class Player : MonoBehaviour
 					Animal animal = hit.transform.GetComponent<Animal>();
 					if (animal != null)
 					{
-						OnAnimalHit(animal);
+						OnAnimalHit(animal, Arrow.WhatToMake.LOVE);
 					}
 				}
 			}
 		}
 		else
 		{
-			if (Input.GetMouseButton(0))
+			if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 			{
 				m_shotChargeTime += Time.deltaTime;
 				if (m_shotChargeTime <= chargeMaxTime)
@@ -47,30 +48,42 @@ public class Player : MonoBehaviour
 					m_shotCharge += chargeForceFactor * Time.deltaTime;
 				}
 			}
-			if (Input.GetMouseButtonUp(0))
+			if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
 			{
-				var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-				var arrowGO = Instantiate(arrow, transform.position, Quaternion.identity);
+                bool loveArrow = Input.GetMouseButtonUp(0);
+                GameObject prefab = loveArrow ? loveArrowPrefab : warArrowPrefab;
+                var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+				var arrowGO = Instantiate(prefab, transform.position, Quaternion.identity);
 				var arrowRB = arrowGO.GetComponent<Rigidbody2D>();
 				arrowRB.AddForce(dir * (arrowForceFactor + m_shotCharge), ForceMode2D.Impulse);
 				m_shotCharge = m_shotChargeTime = 0;
-				var arrowBeh = arrowGO.GetComponent<Arrow>();
+               
+                
+                var arrowBeh = arrowGO.GetComponent<Arrow>();
 				arrowBeh.OnCollisionWithAnimal += OnAnimalHit;
 			}
 		}
 	}
 
-	void OnAnimalHit(Animal animal)
+	void OnAnimalHit(Animal animal, Arrow.WhatToMake whatToMake)
 	{
-		if (!m_queuedAnimal || m_queuedAnimal.IsDead())
-		{
-			m_queuedAnimal = animal;
-		}
-		else if (animal != m_queuedAnimal) // cannot select same animal twice
-		{
-			m_queuedAnimal.OrderMeet(animal);
-			animal.OrderMeet(m_queuedAnimal);
-			m_queuedAnimal = null;
-		}
-	}
+        if (whatToMake == Arrow.WhatToMake.LOVE)
+        {
+            if (!m_queuedAnimal || m_queuedAnimal.IsDead())
+            {
+                m_queuedAnimal = animal;
+            }
+            else if (animal != m_queuedAnimal) // cannot select same animal twice
+            {
+                m_queuedAnimal.OrderMeet(animal);
+                animal.OrderMeet(m_queuedAnimal);
+                m_queuedAnimal = null;
+            }
+        }
+        else
+        {
+            animal.Die();
+        }
+
+    }
 }

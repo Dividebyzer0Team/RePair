@@ -92,7 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d60d91e34ddd482a80a480662e3dc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 6454257349755722092, guid: f1848fbb0ff6e92488f0e0f30e95c7de, type: 3}
-  arrowForceFactor: 1
+  loveArrowPrefab: {fileID: 6454257349755722092, guid: f1848fbb0ff6e92488f0e0f30e95c7de,
+    type: 3}
+  warArrowPrefab: {fileID: 565218867683922080, guid: dd258c58c54d543d48bfaca2fd50fecd,
+    type: 3}
+  arrowForceFactor: 5
   chargeForceFactor: 5
   chargeMaxTime: 1.5
+  debugBreeding: 0
