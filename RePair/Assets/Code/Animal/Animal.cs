@@ -100,12 +100,14 @@ public class Animal : MonoBehaviour
 
 	void DestoySelf()
 	{
+	GameController.GetInstance().animals.Remove(gameObject);
 		Destroy(gameObject);
 	}
 
 	void Awake()
 	{
-		m_animalBase = GameObject.Find("GameController").GetComponent<GameController>().animalBase;
+	GameController.GetInstance().animals.Add(gameObject);
+	m_animalBase = GameObject.Find("GameController").GetComponent<GameController>().animalBase;
 		m_view = GetComponentInChildren<SkeletonController>();
 		m_rigidbody = GetComponent<Rigidbody2D>();
 		if (preset != null)
@@ -126,12 +128,15 @@ public class Animal : MonoBehaviour
 		m_orientation = Mathf.Sign(-m_rigidbody.velocity.x);
 		if (m_orientation == 0f)
 			m_orientation = 1f;
-		ManageAge(Time.fixedDeltaTime);
-		// hunger
-		if (m_traits.ContainsKey("stomachSize"))
+		if (GameController.GetInstance().gameStarted)
 		{
+		  ManageAge(Time.fixedDeltaTime);
+		  if (m_traits.ContainsKey("stomachSize"))
+		  {
 			m_traits["stomachFullness"] -= m_hungerFactor * Time.fixedDeltaTime;
+		  }
 		}
+	
 	}
 
 	public float GetTrait(string traitName)

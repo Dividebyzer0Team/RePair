@@ -1,20 +1,58 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
-	public GameObject animalBase;
-	public float animalHungerFactor = 1.0f;
-	public float animalFeedingFactor = 1.0f;
-	public float animalRunningDirectionRandomizeInterval = 0.25f;
+  public GameObject animalBase;
+  public float animalHungerFactor = 1.0f;
+  public float animalFeedingFactor = 1.0f;
+  public float animalRunningDirectionRandomizeInterval = 0.25f;
+  public bool gameStarted;
+  public GameObject gameBounds;
 
-	static GameController instance;
-	public static GameController GetInstance()
-	{
-		return GameController.instance;
-	}
+  public List<GameObject> animals;
+  [System.Serializable]
+  public struct AnimalSpawn
+  {
+	public GameObject prefab;
+	public int amount;
+  }
+  public List<AnimalSpawn> spawns;
 
-	private void Awake()
-	{
-		GameController.instance = this;
-	}
+  static GameController instance;
+  public static GameController GetInstance()
+  {
+	return GameController.instance;
+  }
+
+  private void Awake()
+  {
+	GameController.instance = this;
+	StartGame();
+  }
+
+  public void Genocide()
+  {
+		foreach (GameObject animalGO in animals)
+		{
+		  Destroy(animalGO);
+		}
+		animals.Clear();
+  }
+
+  public void StartGame()
+  {
+		gameStarted = true;
+		foreach (AnimalSpawn spawn in spawns)
+		{
+		  GameObject animalGO = Instantiate(spawn.prefab);
+		  animalGO.transform.position = new Vector2(Random.Range(-gameBounds.transform.localScale.x / 50, gameBounds.transform.localScale.x / 50), 0);
+		}
+  }
+
+  public void EndGame()
+  {
+		gameStarted = false;
+		Genocide();
+  }
 }
