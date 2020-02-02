@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
   {
 	tutorialManager.SetActive(true);
 	Invoke("StartGame", 7f);
-	Invoke("ShowEndMentor", 300f);
+	Invoke("ShowEndMentor", 20f);
   }
 
 	void RestartGame()
