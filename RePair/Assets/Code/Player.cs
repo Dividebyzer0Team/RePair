@@ -1,19 +1,26 @@
 using UnityEngine;
+using Spine.Unity;
 
 public class Player : MonoBehaviour
 {
 	public GameObject loveArrowPrefab;
-    public GameObject warArrowPrefab;
-    public float arrowForceFactor = 1.0f;
+	public GameObject warArrowPrefab;
+	public float arrowForceFactor = 1.0f;
 	public float chargeForceFactor = 1.0f;
 	public float chargeMaxTime = 1.5f;
 	public bool debugBreeding = false;
 
 	private Animal m_queuedAnimal;
 	private float m_shotCharge, m_shotChargeTime;
+	private GameObject m_view;
+	private SkeletonAnimation m_animation;
+	private Transform m_aim;
 
 	void Start()
 	{
+		m_view = transform.Find("View").gameObject;
+		m_animation = GetComponentInChildren <SkeletonAnimation> ();
+		m_aim = m_view.transform.Find("SkeletonUtility-SkeletonRoot/root/aim_bone");
 	}
 
 	void Update()
@@ -23,13 +30,21 @@ public class Player : MonoBehaviour
 
 	void HandleBreeding()
 	{
-	if (!GameController.GetInstance().gameStarted)
-	  return;
+		if (!GameController.GetInstance().gameStarted) return;
+
+		var worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		worldMousePosition.z = 0;
+
+		if ((transform.position - worldMousePosition).magnitude > transform.localScale.x * 2)
+		{
+			m_aim.transform.position = worldMousePosition;
+		}
+
 		if (debugBreeding)
 		{
 			if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 			{
-				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+				RaycastHit2D hit = Physics2D.Raycast(worldMousePosition, Vector2.zero);
 				if (hit.collider != null)
 				{
 					Animal animal = hit.transform.GetComponent<Animal>();
@@ -52,9 +67,13 @@ public class Player : MonoBehaviour
 			}
 			if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
 			{
-        bool loveArrow = Input.GetMouseButtonUp(0);
+				m_animation.AnimationState.SetAnimation(0, "shoot", false);
+				m_animation.AnimationState.AddAnimation(0, "prepare", false, 0);
+				m_animation.AnimationState.AddAnimation(0, "idle", true, 0);
+
+				bool loveArrow = Input.GetMouseButtonUp(0);
         GameObject prefab = loveArrow ? loveArrowPrefab : warArrowPrefab;
-        var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        var dir = (worldMousePosition - transform.position).normalized;
 				var arrowGO = Instantiate(prefab, transform.position, Quaternion.identity);
 				var arrowRB = arrowGO.GetComponent<Rigidbody2D>();
 				arrowRB.AddForce(dir * (arrowForceFactor + m_shotCharge), ForceMode2D.Impulse);

@@ -1,0 +1,62 @@
+
+Player.png
+size: 1505,692
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+char_arrow
+  rotate: true
+  xy: 1272, 218
+  size: 231, 214
+  orig: 231, 214
+  offset: 0, 0
+  index: -1
+char_body
+  rotate: false
+  xy: 1272, 451
+  size: 231, 239
+  orig: 231, 239
+  offset: 0, 0
+  index: -1
+char_bow
+  rotate: false
+  xy: 779, 394
+  size: 491, 296
+  orig: 491, 296
+  offset: 0, 0
+  index: -1
+char_hand
+  rotate: true
+  xy: 779, 38
+  size: 93, 101
+  orig: 93, 101
+  offset: 0, 0
+  index: -1
+char_head
+  rotate: false
+  xy: 2, 2
+  size: 775, 688
+  orig: 775, 688
+  offset: 0, 0
+  index: -1
+char_kolchan
+  rotate: true
+  xy: 1233, 46
+  size: 170, 195
+  orig: 170, 195
+  offset: 0, 0
+  index: -1
+char_legs
+  rotate: true
+  xy: 1056, 41
+  size: 351, 175
+  orig: 351, 175
+  offset: 0, 0
+  index: -1
+char_wing
+  rotate: false
+  xy: 779, 133
+  size: 275, 259
+  orig: 275, 259
+  offset: 0, 0
+  index: -1
