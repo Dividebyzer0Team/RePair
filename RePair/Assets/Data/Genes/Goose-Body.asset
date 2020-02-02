@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Goose-Body
   m_EditorClassIdentifier: 
+  animalName: Goose
   representation: {fileID: 8722358038047422501, guid: 1d9c6bf2a948c4dd4b6b2111c971a1e7,
     type: 3}
   traits:

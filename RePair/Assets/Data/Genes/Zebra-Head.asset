@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Zebra-Head
   m_EditorClassIdentifier: 
+  animalName: Zebra
   representation: {fileID: 8953229064592593400, guid: b1569740affae4089b0456b1e3c9b290,
     type: 3}
   traits:

@@ -13,29 +13,32 @@ public class SkeletonPartController : MonoBehaviour
     Vector3 initialLocalPos;
     Vector2 initialStackPointLocalPos;
     Bone stackPoint;
-    
-    public void PlayAnimation(string anim, SkeletonAnimation parentSkeletonAnimation)
+ 
+    public void SetSkeleton(SkeletonDataAsset newSkeleton, SkeletonAnimation parentSkeletonAnimation)
     {
-        // move to SetBodyPart
-        //Debug.Log(">>> 1 " + gameObject.name);
+        skeleton = newSkeleton;
         SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
         if (skeletonAnimation != null) {
-            //Debug.Log(">>> 2 " + gameObject.name);
-            // run animation
-            skeletonAnimation.state.SetAnimation(0, anim, true);
+            skeletonAnimation.skeleton = new Skeleton(newSkeleton.GetSkeletonData(false ));
+        }
 
-            Vector3 localPos = gameObject.transform.localPosition;
-            initialLocalPos = new Vector3(localPos.x, localPos.y, localPos.z);
+        Vector3 localPos = gameObject.transform.localPosition;
+        initialLocalPos = new Vector3(localPos.x, localPos.y, localPos.z);
 
-            // follow parent's stack point
-            if (parentSkeletonAnimation != null) {
-                //Debug.Log(">>> 3 " + gameObject.name);
-                stackPoint = parentSkeletonAnimation.skeleton.FindBone("stack_point");
-                if (stackPoint != null) {
-                    //Debug.Log(">>> 4 " + gameObject.name);
-                    initialStackPointLocalPos = new Vector2(stackPoint.WorldX, stackPoint.WorldY);
-                }
+        // follow parent's stack point
+        if (parentSkeletonAnimation != null) {
+            stackPoint = parentSkeletonAnimation.skeleton.FindBone("stack_point");
+            if (stackPoint != null) {
+                initialStackPointLocalPos = new Vector2(stackPoint.WorldX, stackPoint.WorldY);
             }
+        }
+    }
+ 
+    public void PlayAnimation(string anim)
+    {
+        SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
+        if (skeletonAnimation != null) {
+            skeletonAnimation.state.SetAnimation(0, anim, true);
         }
     }
 
