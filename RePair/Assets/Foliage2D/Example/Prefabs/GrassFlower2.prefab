@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 114470273382979444}
   - component: {fileID: 95126901190012244}
   - component: {fileID: 61196517361162370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassFlower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1718615897018306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 5
 --- !u!114 &114056959948962724
 MonoBehaviour:
   m_ObjectHideFlags: 0

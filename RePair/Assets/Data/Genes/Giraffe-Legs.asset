@@ -16,9 +16,9 @@ MonoBehaviour:
   representation: {fileID: 0}
   traits:
   - name: size
-    factor: 0.66
+    factor: 1.2
   - name: lifetime
-    factor: 8
+    factor: 25
   - name: wanderDistance
     factor: 4
   - name: thinkingTime

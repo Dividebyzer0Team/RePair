@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 3}
   traits:
   - name: size
-    factor: 0.4
+    factor: 0.6
   - name: lifetime
     factor: 5
   - name: wanderDistance

@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 3}
   traits:
   - name: size
-    factor: 0.4
+    factor: 0.6
   - name: lifetime
     factor: 5
   - name: wanderDistance
@@ -29,7 +29,7 @@ MonoBehaviour:
   - name: eating
     factor: 0.33
   - name: flying
-    factor: 2
+    factor: 3
   - name: stomachSize
     factor: 3
   - name: running

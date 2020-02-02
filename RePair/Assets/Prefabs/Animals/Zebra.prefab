@@ -337,10 +337,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5185209479141768254, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 5185209479141768255, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185209480238337752, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5185209480238337753, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
@@ -361,6 +371,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185209481009063313, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5185209481009063314, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
