@@ -24,6 +24,7 @@ public class Animal : MonoBehaviour
 	bool m_active;
 	bool m_dead;
     bool m_visible = true;
+  bool m_presetted = false;
 	MovementMethod m_movementMethod = MovementMethod.WALK;
 
     public void SetVisibility(bool visible)
@@ -46,6 +47,7 @@ public class Animal : MonoBehaviour
 
 	private void InitFromPreset()
 	{
+	m_presetted = true;
 		m_genome = new Genome(preset.genes);
 		Invoke("InitAnimal", 0.1f);
 	}
@@ -67,7 +69,11 @@ public class Animal : MonoBehaviour
 			m_rigidbody.gravityScale = 0f;
 		}
 		m_traits["age"] = 0f;
-		m_traits["currentSize"] = GetTrait("size") * 0.5f;
+	if (m_presetted)
+	{
+	  m_traits["age"] = Random.Range(0f, GetTrait("lifetime"));
+	}
+	m_traits["currentSize"] = GetTrait("size") * 0.5f;
 		float size = GetTrait("size") * 0.5f;
 		m_view.SetBodyPart("Head", m_genome.Head.skeletonAsset);
 		m_view.SetBodyPart("Front", m_genome.Body.skeletonAsset);
