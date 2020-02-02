@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+	Invoke("ShowTutor", 6f);
     }
 
     // Update is called once per frame
@@ -20,4 +20,9 @@ public class UIManager : MonoBehaviour
     {
         
     }
+
+	void ShowTutor()
+  {
+	tutorialManager.SetActive(true);
+  }
 }
