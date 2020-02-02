@@ -1,0 +1,27 @@
+
+elephant_head.png
+size: 1196,734
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eleph_ear
+  rotate: true
+  xy: 682, 289
+  size: 443, 512
+  orig: 483, 512
+  offset: 0, 0
+  index: -1
+eleph_head
+  rotate: true
+  xy: 2, 2
+  size: 730, 678
+  orig: 809, 678
+  offset: 0, 0
+  index: -1
+eleph_tusk
+  rotate: false
+  xy: 682, 20
+  size: 479, 267
+  orig: 910, 514
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,13 @@
+
+jiraffe_head.png
+size: 297,568
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+giraffe_head
+  rotate: false
+  xy: 2, 2
+  size: 293, 564
+  orig: 293, 564
+  offset: 0, 0
+  index: -1
