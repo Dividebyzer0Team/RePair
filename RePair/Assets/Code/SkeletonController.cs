@@ -5,6 +5,9 @@ using Spine;
 
 public class SkeletonController : MonoBehaviour
 {
+    GameObject rear, front, head;
+    SkeletonPartController headSkelController, frontSkelController, rearSkelController;
+
     // "fly", "walk", "idle"
     public void SwitchAnimationState(string animState)
     {   
@@ -18,32 +21,13 @@ public class SkeletonController : MonoBehaviour
     // "Zebra", "Rhino", "Jiraffe", "Goose", "Red", "Elephant"
     public void SetBodyPart(string slot, string phenotype)
     {
-        SkeletonPartController skel;
-        SkeletonAnimation parentSkelAnim;
- 
-        GameObject rear = gameObject.transform.GetChild(0).gameObject;
-        GameObject front = gameObject.transform.GetChild(1).gameObject;
-        GameObject head = gameObject.transform.GetChild(2).gameObject;
- 
-        if (slot == "Head") {
-            skel = head.GetComponent<SkeletonPartController>();
-            parentSkelAnim =  front.GetComponent<SkeletonAnimation>();
-        } else if (slot == "Front") {
-            skel = front.GetComponent<SkeletonPartController>();
-            parentSkelAnim =  rear.GetComponent<SkeletonAnimation>();
-        } else if (slot == "Rear") {
-            skel = rear.GetComponent<SkeletonPartController>();
-            parentSkelAnim = null;
-        } else if (slot == null) {
+        if (slot == null) {
             SetBodyPart("Head", phenotype);
             SetBodyPart("Front", phenotype);
             SetBodyPart("Rear", phenotype);
             return;
-        } else {
-            Debug.Log("Unknown body part slot: " + slot);
-            return;
         }
-
+ 
         string fname = phenotype.ToLower() + "_" + slot.ToLower() + "_SkeletonData.asset";
         string path = "Assets/BodyParts/" + phenotype + slot + "/" + fname;
         SkeletonDataAsset skelData = (SkeletonDataAsset) AssetDatabase.LoadAssetAtPath("Assets/BodyParts/" + phenotype + slot + "/" + phenotype.ToLower() + "_" + slot.ToLower() + "_SkeletonData.asset", typeof(SkeletonDataAsset));
@@ -52,6 +36,45 @@ public class SkeletonController : MonoBehaviour
             return;
         }
 
-        skel.SetSkeleton(skelData, parentSkelAnim);
+        SkeletonPartController controller = null, childController = null;
+        SkeletonAnimation animationComponent = null;
+ 
+        if (slot == "Head") {
+            controller = headSkelController;
+        } else if (slot == "Front") {
+            controller = frontSkelController;
+            childController = headSkelController;
+            animationComponent = front.GetComponent<SkeletonAnimation>();
+        } else if (slot == "Rear") {
+            controller = rearSkelController;
+            childController = frontSkelController;
+            animationComponent = rear.GetComponent<SkeletonAnimation>();
+        } else
+            Debug.Log("Unknown body part slot: " + slot);
+
+        if (controller != null)
+            controller.SetSkeleton(skelData);
+        if (childController != null && animationComponent != null)
+            childController.OnParentSkeletonChanged(animationComponent);
+    }
+ 
+    void Start()
+    {
+        rear  = gameObject.transform.GetChild(0).gameObject;
+        front = gameObject.transform.GetChild(1).gameObject;
+        head  = gameObject.transform.GetChild(2).gameObject;
+        headSkelController  = head.GetComponent<SkeletonPartController>();
+        frontSkelController = front.GetComponent<SkeletonPartController>();
+        rearSkelController  = rear.GetComponent<SkeletonPartController>();
+
+        frontSkelController.OnParentSkeletonChanged(rear.GetComponent<SkeletonAnimation>());
+        headSkelController.OnParentSkeletonChanged(front.GetComponent<SkeletonAnimation>());
+
+        // test
+         SetBodyPart(null, "Zebra");
+         SwitchAnimationState("idle");
+         SetBodyPart("Rear", "Goose");
+         SwitchAnimationState("walk");
+         SetBodyPart("Head", "Elephant");
     }
 }

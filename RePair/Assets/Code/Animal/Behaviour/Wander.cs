@@ -27,7 +27,7 @@ public class Wander : Behaviour
     {
         Vector2 wanderDirection = Random.value > 0.5 ? Vector2.left : Vector2.right;
 
-        float hostSize = m_host.GetTrait("size");
+        float hostSize = m_host.GetTrait("currentSize");
         float flyingHeight = m_host.GetTrait("flyingHeight");
 
         float wanderDistance = Random.Range(hostSize, hostSize * m_host.GetTrait("wanderDistance"));

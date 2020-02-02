@@ -19,9 +19,21 @@ public class Animal : MonoBehaviour
 	Rigidbody2D m_rigidbody;
 	Behaviour m_behaviour;
 	SkeletonController m_view;
-	bool m_orientation; // true = left
+	float m_orientation; // +1 = right
 	float m_hungerFactor;
 	bool m_active;
+<<<<<<< HEAD
+=======
+    bool m_dead;
+	enum MovementMethod
+	{
+		WALK,
+		JUMP,
+		FLY
+	}
+
+
+>>>>>>> 853900d3faedf14f04eba03549c225e2f92fc122
 	MovementMethod m_movementMethod = MovementMethod.WALK;
 
 	public Genome GetGenome()
@@ -43,9 +55,7 @@ public class Animal : MonoBehaviour
 
 	private void InitAnimal()
 	{
-		Debug.Log("InitAnimal");
 		m_traits = m_genome.GetAllTraits();
-		m_traits["age"] = 0f;
 		float canFly = GetTrait("flying") - GetTrait("size");
 		if (canFly > 0)
 		{
@@ -53,8 +63,9 @@ public class Animal : MonoBehaviour
 			m_movementMethod = MovementMethod.FLY;
 			m_rigidbody.gravityScale = 0f;
 		}
-
-		float size = GetTrait("size");
+        m_traits["age"] = 0f;
+        m_traits["currentSize"] = GetTrait("size") * 0.5f;
+        float size = GetTrait("size") * 0.5f;
 		m_view.SetBodyPart("Head", m_genome.Head.animalName);
 		m_view.SetBodyPart("Front", m_genome.Body.animalName);
 		m_view.SetBodyPart("Rear", m_genome.Legs.animalName);
@@ -69,12 +80,41 @@ public class Animal : MonoBehaviour
 		}
 	}
 
-	void Die()
+    public bool IsDead()
+    {
+        return m_dead;
+    }
+
+    public void Die()
 	{
-		Destroy(this.gameObject);
+        m_rigidbody.velocity = Vector2.zero;
+        m_dead = true;
+        GetComponent<Collider2D>().enabled = false;
+        m_rigidbody.gravityScale = 0;
+        m_behaviour = new Die(this);
+        Invoke("DestroySelf", 10f);
+		//Destroy(gameObject);
 	}
 
-	void Awake()
+    void ManageAge(float deltaTime)
+    {
+        m_traits["age"] += deltaTime;
+        float age = GetTrait("age");
+        float size = GetTrait("size");
+
+        float lifeProgess = age / GetTrait("lifetime");
+        float sizeMod = Mathf.Min(1f, 0.5f + lifeProgess * 2.5f);
+        m_traits["currentSize"] = sizeMod * size;
+        float currentSize = sizeMod * size;
+        transform.localScale = new Vector3(m_orientation * currentSize, currentSize, 1f);
+    }
+
+    void DestoySelf()
+    {
+        Destroy(gameObject);
+    }
+
+    void Awake()
 	{
 		m_animalBase = GameObject.Find("GameController").GetComponent<GameController>().animalBase;
 		m_view = GetComponentInChildren<SkeletonController>();
@@ -84,19 +124,24 @@ public class Animal : MonoBehaviour
 		Invoke("Idle", 0.3f);
 	}
 
-	void FixedUpdate()
+    void UpdateSize()
+    {
+
+    }
+
+    void FixedUpdate()
 	{
-		if (!m_active) return;
-		if (m_behaviour != null) m_behaviour.Update(Time.fixedDeltaTime);
-		SetOrientation(m_rigidbody.velocity.x > 0);
-
-		// aging
-		m_traits["age"] += Time.fixedDeltaTime;
-
+        if (!m_active)
+            return;
+        if (m_behaviour != null) m_behaviour.Update(Time.fixedDeltaTime);
+        m_orientation = Mathf.Sign(-m_rigidbody.velocity.x);
+        if (m_orientation == 0f)
+            m_orientation = 1f;
+        ManageAge(Time.fixedDeltaTime);
 		// hunger
 		if (m_traits.ContainsKey("stomachSize"))
 		{
-			m_traits["stomachFullness"] -= m_hungerFactor * Time.deltaTime;
+			m_traits["stomachFullness"] -= m_hungerFactor * Time.fixedDeltaTime;
 		}
 	}
 
@@ -109,13 +154,6 @@ public class Animal : MonoBehaviour
 	public void SetTrait(string traitName, float traitValue)
 	{
 		m_traits[traitName] = traitValue;
-	}
-
-	public void SetOrientation(bool orientation)
-	{
-		if (m_orientation != orientation)
-			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-		m_orientation = orientation;
 	}
 
 	public void Move(Vector3 position)
@@ -133,7 +171,6 @@ public class Animal : MonoBehaviour
 			SetState("fly");
 			m_rigidbody.velocity = (position - transform.position).normalized * speed;
 		}
-		SetOrientation(m_rigidbody.velocity.x > 0);
 	}
 
 	public void OnActionStop()

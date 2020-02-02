@@ -14,18 +14,23 @@ public class SkeletonPartController : MonoBehaviour
     Vector2 initialStackPointLocalPos;
     Bone stackPoint;
  
-    public void SetSkeleton(SkeletonDataAsset newSkeleton, SkeletonAnimation parentSkeletonAnimation)
+    public void SetSkeleton(SkeletonDataAsset newSkeleton)
     {
-        skeleton = newSkeleton;
         SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
         if (skeletonAnimation != null) {
-            skeletonAnimation.skeleton = new Skeleton(newSkeleton.GetSkeletonData(false ));
+            string anim = skeletonAnimation.AnimationName;
+            skeletonAnimation.ClearState();
+
+            skeletonAnimation.skeletonDataAsset = newSkeleton;
+            skeletonAnimation.Initialize(true);
+
+            skeleton = newSkeleton;
+            skeletonAnimation.AnimationName = anim;
         }
-
-        Vector3 localPos = gameObject.transform.localPosition;
-        initialLocalPos = new Vector3(localPos.x, localPos.y, localPos.z);
-
-        // follow parent's stack point
+    }
+ 
+    public void OnParentSkeletonChanged(SkeletonAnimation parentSkeletonAnimation)
+    {
         if (parentSkeletonAnimation != null) {
             stackPoint = parentSkeletonAnimation.skeleton.FindBone("stack_point");
             if (stackPoint != null) {
@@ -38,13 +43,15 @@ public class SkeletonPartController : MonoBehaviour
     {
         SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
         if (skeletonAnimation != null) {
-            skeletonAnimation.state.SetAnimation(0, anim, true);
+            skeletonAnimation.AnimationName = anim;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Vector3 localPos = gameObject.transform.localPosition;
+        initialLocalPos = new Vector3(localPos.x, localPos.y, localPos.z);
     }
 
     public void Update()
