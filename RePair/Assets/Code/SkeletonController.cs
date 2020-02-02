@@ -5,6 +5,9 @@ using Spine;
 
 public class SkeletonController : MonoBehaviour
 {
+    GameObject rear, front, head;
+    SkeletonPartController headSkelController, frontSkelController, rearSkelController;
+
     // "fly", "walk", "idle"
     public void SwitchAnimationState(string animState)
     {   
@@ -33,38 +36,45 @@ public class SkeletonController : MonoBehaviour
             return;
         }
 
-        SkeletonPartController skel;
- 
-        GameObject rear = gameObject.transform.GetChild(0).gameObject;
-        GameObject front = gameObject.transform.GetChild(1).gameObject;
-        GameObject head = gameObject.transform.GetChild(2).gameObject;
-  
-        SkeletonPartController headSkelController = head.GetComponent<SkeletonPartController>();
-        SkeletonPartController frontSkelController = front.GetComponent<SkeletonPartController>();
-        SkeletonPartController rearSkelController = rear.GetComponent<SkeletonPartController>();
+        SkeletonPartController controller = null, childController = null;
+        SkeletonAnimation animationComponent = null;
  
         if (slot == "Head") {
-            skel = headSkelController;
-            skel.SetSkeleton(skelData);
+            controller = headSkelController;
         } else if (slot == "Front") {
-            skel = frontSkelController;
-            skel.SetSkeleton(skelData);
-            headSkelController.OnParentSkeletonChanged(front.GetComponent<SkeletonAnimation>());
+            controller = frontSkelController;
+            childController = headSkelController;
+            animationComponent = front.GetComponent<SkeletonAnimation>();
         } else if (slot == "Rear") {
-            skel = rearSkelController;
-            skel.SetSkeleton(skelData);
-            frontSkelController.OnParentSkeletonChanged(rear.GetComponent<SkeletonAnimation>());
-        } else {
+            controller = rearSkelController;
+            childController = frontSkelController;
+            animationComponent = rear.GetComponent<SkeletonAnimation>();
+        } else
             Debug.Log("Unknown body part slot: " + slot);
-            return;
-        }
+
+        if (controller != null)
+            controller.SetSkeleton(skelData);
+        if (childController != null && animationComponent != null)
+            childController.OnParentSkeletonChanged(animationComponent);
     }
  
     void Start()
     {
+        rear  = gameObject.transform.GetChild(0).gameObject;
+        front = gameObject.transform.GetChild(1).gameObject;
+        head  = gameObject.transform.GetChild(2).gameObject;
+        headSkelController  = head.GetComponent<SkeletonPartController>();
+        frontSkelController = front.GetComponent<SkeletonPartController>();
+        rearSkelController  = rear.GetComponent<SkeletonPartController>();
+
+        frontSkelController.OnParentSkeletonChanged(rear.GetComponent<SkeletonAnimation>());
+        headSkelController.OnParentSkeletonChanged(front.GetComponent<SkeletonAnimation>());
+
         // test
-        // SetBodyPart(null, "Zebra");
-        // SwitchAnimationState("idle");
-        // SetBodyPart("Rear", "Goose");
+         SetBodyPart(null, "Zebra");
+         SwitchAnimationState("idle");
+         SetBodyPart("Rear", "Goose");
+         SwitchAnimationState("walk");
+         SetBodyPart("Head", "Elephant");
     }
 }
