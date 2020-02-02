@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Ibis-Body
   m_EditorClassIdentifier: 
   animalName: Red
+  skeletonAsset: {fileID: 0}
   representation: {fileID: 0}
   traits:
   - name: size
     factor: 0.5
   - name: lifetime
-    factor: 15
+    factor: 30
   - name: wanderDistance
     factor: 16
   - name: thinkingTime
