@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Rhinoceros-Legs
   m_EditorClassIdentifier: 
-  representation: {fileID: 0}
+  representation: {fileID: 8580727338465282108, guid: 742c07e9fef0440078b215f1b63f0a79,
+    type: 3}
   traits:
   - name: size
     factor: 0.6

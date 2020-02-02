@@ -12,7 +12,7 @@ public class Animal : MonoBehaviour
 	Rigidbody2D m_rigidbody;
 	Behaviour m_behaviour;
 	SkeletonController m_view;
-	bool m_orientation = true; // true = left
+	bool m_orientation; // true = left
 
 	enum MovementMethod
 	{
@@ -57,14 +57,13 @@ public class Animal : MonoBehaviour
 
 		Invoke("Die", GetTrait("lifetime"));
 		float size = GetTrait("size");
-		GameObject legsGO = GameObject.Instantiate(m_genome.Legs.representation, m_view.transform);
+		GameObject legsGO = Instantiate(m_genome.Legs.representation, m_view.transform);
 		legsGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-		GameObject bodyGO = GameObject.Instantiate(m_genome.Body.representation, legsGO.transform);
+		GameObject bodyGO = Instantiate(m_genome.Body.representation, m_view.transform);
 		bodyGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-		GameObject headGO = GameObject.Instantiate(m_genome.Head.representation, bodyGO.transform);
+		GameObject headGO = Instantiate(m_genome.Head.representation, m_view.transform);
 		headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
 		transform.localScale = new Vector3(size, size, 1f);
-
 	}
 
 
@@ -87,7 +86,8 @@ public class Animal : MonoBehaviour
 	{
 		m_behaviour.Update(Time.fixedDeltaTime);
 		m_traits["age"] += Time.fixedDeltaTime;
-	}
+        SetOrientation(m_rigidbody.velocity.x > 0);
+    }
 
 	public float GetTrait(string traitName)
 	{
@@ -145,7 +145,6 @@ public class Animal : MonoBehaviour
 	{
 		SetState("idle");
 		m_behaviour = new Idle(this);
-		//m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y); //Пока что обнуляем горзонтальную скорость
 	}
 
 	public void Decide()
@@ -166,9 +165,6 @@ public class Animal : MonoBehaviour
 		newAnimalGO.transform.position = (this.transform.position + other.transform.position) / 2;
 		Animal newAnimal = newAnimalGO.GetComponent<Animal>();
 		newAnimal.Inherit(this, other);
-
-		//Временно красим животных
-
 	}
 
 	public Rigidbody2D GetRigidbody()

@@ -27,8 +27,9 @@ public class Player : MonoBehaviour
 		if (Input.GetMouseButtonUp(0))
 		{
 			var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-			var arrowGO = GameObject.Instantiate(arrow, transform, true);
+			var arrowGO = Instantiate(arrow);
 			var arrowRB = arrowGO.GetComponent <Rigidbody2D> ();
+            arrowGO.transform.position = transform.position;
 			arrowRB.AddForce(dir * (arrowForceFactor + m_shotCharge), ForceMode2D.Impulse);
 			m_shotCharge = m_shotChargeTime = 0;
 			var arrowBeh = arrowGO.GetComponent <Arrow> ();

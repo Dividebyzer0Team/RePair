@@ -1,23 +1,19 @@
 ﻿using UnityEngine;
-public class Meet : Behaviour
+public class MeetManual : Behaviour
 {
+    float m_matingDistance;
     Animal m_target;
-    float m_power = 4f;
-    float m_time = 0f;
-    public Meet(Animal host, Animal target) {
+    public MeetManual(Animal host, Animal target) {
         m_host = host;
         m_target = target;
-        
-        m_matingDistance = (m_host.GetTrait("size") + m_target.GetTrait("size")) * 0.5f;
+        m_matingDistance = 2f;
+        //m_matingDistance = m_target.transform.localScale.x / 2 + m_host.transform.localScale.x / 2; // Дистанция траханья
         m_name = "Meet";
     }
-
-    float m_matingDistance;
 
     public override void Update(float deltaTime)
     {
         base.Update(deltaTime);
-        m_time += deltaTime;
         if (m_target == null)
         {
             m_host.Idle();
@@ -26,7 +22,7 @@ public class Meet : Behaviour
         Vector2 toTarget = m_target.transform.position - m_host.transform.position;
         if (toTarget.magnitude <= m_matingDistance)
             Stop();
-        m_host.GetRigidbody().velocity = toTarget * m_time * m_power;
+        m_host.Move(m_target.transform.position);
     }
 
     public override void Stop() {
