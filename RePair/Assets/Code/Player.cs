@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-			if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+			if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
 			{
 				m_shotChargeTime += Time.deltaTime;
 				if (m_shotChargeTime <= chargeMaxTime)
@@ -50,16 +50,14 @@ public class Player : MonoBehaviour
 			}
 			if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
 			{
-                bool loveArrow = Input.GetMouseButtonUp(0);
-                GameObject prefab = loveArrow ? loveArrowPrefab : warArrowPrefab;
-                var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        bool loveArrow = Input.GetMouseButtonUp(0);
+        GameObject prefab = loveArrow ? loveArrowPrefab : warArrowPrefab;
+        var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 				var arrowGO = Instantiate(prefab, transform.position, Quaternion.identity);
 				var arrowRB = arrowGO.GetComponent<Rigidbody2D>();
 				arrowRB.AddForce(dir * (arrowForceFactor + m_shotCharge), ForceMode2D.Impulse);
 				m_shotCharge = m_shotChargeTime = 0;
-               
-                
-                var arrowBeh = arrowGO.GetComponent<Arrow>();
+				var arrowBeh = arrowGO.GetComponent<Arrow>();
 				arrowBeh.OnCollisionWithAnimal += OnAnimalHit;
 			}
 		}
