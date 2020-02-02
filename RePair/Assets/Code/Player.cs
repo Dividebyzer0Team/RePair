@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
 	void OnAnimalHit(Animal animal)
 	{
-		if (!m_queuedAnimal)
+		if (!m_queuedAnimal || m_queuedAnimal.IsDead())
 		{
 			m_queuedAnimal = animal;
 		}

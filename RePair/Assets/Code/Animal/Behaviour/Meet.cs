@@ -8,7 +8,7 @@ public class Meet : Behaviour
         m_host = host;
         m_target = target;
         
-        m_matingDistance = (m_host.GetTrait("size") + m_target.GetTrait("size")) * 0.5f;
+        m_matingDistance = (m_host.GetTrait("currentSize") + m_target.GetTrait("currentSize")) * 0.5f;
         m_name = "Meet";
     }
 
@@ -18,7 +18,7 @@ public class Meet : Behaviour
     {
         base.Update(deltaTime);
         m_time += deltaTime;
-        if (m_target == null)
+        if (m_target == null || m_target.IsDead())
         {
             m_host.Idle();
             return;

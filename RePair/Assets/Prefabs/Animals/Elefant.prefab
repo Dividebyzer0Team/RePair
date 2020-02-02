@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 8358506345254341890}
   - component: {fileID: 8358506345254341891}
   - component: {fileID: 8358506345254341900}
-  - component: {fileID: 8358506345254341889}
+  - component: {fileID: 5280209635910098769}
   m_Layer: 8
   m_Name: Elefant
   m_TagString: Untagged
@@ -172,7 +172,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 40d714531fc3041138ebf82648b75872, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -224,8 +224,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8358506345254341901}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!61 &8358506345254341889
-BoxCollider2D:
+--- !u!58 &5280209635910098769
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -237,19 +237,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.1, y: 0.4}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.4
 --- !u!1001 &483564615786842093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257,10 +247,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8358506345254341895}
     m_Modifications:
+    - target: {fileID: 1788764514152641958, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: bfbb7271631bb2542a3cab37a468237a,
+        type: 2}
+    - target: {fileID: 4151821830106010082, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e60dce816ff8e54ebe4db431bd852cd,
+        type: 2}
     - target: {fileID: 5185209479116322037, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
       propertyPath: m_Name
       value: CombinedView
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185209479116322037, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5185209479116322038, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
@@ -347,11 +354,33 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5185209479141768253, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: skeleton
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bb4bcdc1fb143f49b2b040a14988d59,
+        type: 2}
+    - target: {fileID: 5185209479141768254, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c84bc55e560d3484fa9360abfed906f3, type: 2}
     - target: {fileID: 5185209479141768255, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5185209480238337703, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: skeleton
+      value: 
+      objectReference: {fileID: 11400000, guid: bfbb7271631bb2542a3cab37a468237a,
+        type: 2}
+    - target: {fileID: 5185209480238337752, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a917b840128aa92439d98f9c2f0e27f1, type: 2}
     - target: {fileID: 5185209480238337753, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
       propertyPath: m_Mesh
@@ -372,6 +401,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5185209481009063312, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: skeleton
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e60dce816ff8e54ebe4db431bd852cd,
+        type: 2}
+    - target: {fileID: 5185209481009063313, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ab55e389ecbec04db8166b6ad2fb880, type: 2}
     - target: {fileID: 5185209481009063314, guid: 0524b711e18467643b39f81a819d1bca,
         type: 3}
       propertyPath: m_Mesh
@@ -392,6 +432,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5960676267963484369, guid: 0524b711e18467643b39f81a819d1bca,
+        type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bb4bcdc1fb143f49b2b040a14988d59,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0524b711e18467643b39f81a819d1bca, type: 3}
 --- !u!4 &4701872326853735195 stripped
