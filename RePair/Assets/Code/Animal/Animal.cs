@@ -23,7 +23,21 @@ public class Animal : MonoBehaviour
 	float m_hungerFactor;
 	bool m_active;
 	bool m_dead;
+    bool m_visible = true;
 	MovementMethod m_movementMethod = MovementMethod.WALK;
+
+    public void SetVisibility(bool visible)
+    {
+        if (m_visible == visible)
+            return;
+ 
+        foreach (Transform child in m_view.transform) {
+            var partView = child.gameObject.GetComponent<MeshRenderer>();
+            if (partView)
+                partView.enabled = visible;
+            m_visible = visible;
+        }
+    }
 
 	public Genome GetGenome()
 	{
@@ -133,8 +147,10 @@ public class Animal : MonoBehaviour
 			m_orientation = 1f;
 		if (GameController.GetInstance().gameStarted)
 		{
-		  ManageAge(Time.fixedDeltaTime);
-		  if (m_traits.ContainsKey("stomachSize"))
+          if (!m_dead)
+            ManageAge(Time.fixedDeltaTime);
+		  
+          if (m_traits.ContainsKey("stomachSize"))
 		  {
 			m_traits["stomachFullness"] -= m_hungerFactor * Time.fixedDeltaTime;
 		  }
