@@ -13,6 +13,7 @@ public class Animal : MonoBehaviour
 	Behaviour m_behaviour;
 	SkeletonController m_view;
 	bool m_orientation; // true = left
+    bool m_active;
 
 	enum MovementMethod
 	{
@@ -32,13 +33,14 @@ public class Animal : MonoBehaviour
 	private void InitFromPreset()
 	{
 		m_genome = new Genome(preset.genes);
-		InitAnimal();
-	}
+        Invoke("InitAnimal", 0.1f);
+        //InitAnimal();
+    }
 
 	public void Inherit(Animal parent1, Animal parent2)
 	{
 		m_genome = Genome.Breed(parent1.GetGenome(), parent2.GetGenome());
-		InitAnimal();
+		Invoke("InitAnimal", 0.1f);
 
 	}
 
@@ -55,21 +57,14 @@ public class Animal : MonoBehaviour
 			m_rigidbody.gravityScale = 0f;
 		}
 
-		//Invoke("Die", GetTrait("lifetimme"));
 		float size = GetTrait("size");
         m_view.SetBodyPart("Head", m_genome.Head.animalName);
         m_view.SetBodyPart("Front", m_genome.Body.animalName);
         m_view.SetBodyPart("Rear", m_genome.Legs.animalName);
-        m_view.enabled = false;
-        m_view.enabled = true;
-        //GameObject legsGO = Instantiate(m_genome.Legs.representation, m_view.transform);
-        //legsGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-        //GameObject bodyGO = Instantiate(m_genome.Body.representation, m_view.transform);
-        //bodyGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-        //GameObject headGO = Instantiate(m_genome.Head.representation, m_view.transform);
-        //headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
         transform.localScale = new Vector3(size, size, 1f);
-	}
+        m_active = true;
+        Invoke("Die", GetTrait("lifetime"));
+    }
 
 
 	void Die()
@@ -84,11 +79,13 @@ public class Animal : MonoBehaviour
 		m_rigidbody = GetComponent<Rigidbody2D>();
 		if (preset != null)
 			InitFromPreset();
-        Invoke("Idle", 3f);
+        Invoke("Idle", 0.3f);
 	}
 
 	void FixedUpdate()
 	{
+        if (!m_active)
+            return;
 		if (m_behaviour != null)
             m_behaviour.Update(Time.fixedDeltaTime);
 		m_traits["age"] += Time.fixedDeltaTime;
@@ -165,15 +162,19 @@ public class Animal : MonoBehaviour
 
 	public void Mate(Animal other)
 	{
-		Idle();
-		other.Idle();
-		GameObject newAnimalGO = Instantiate(m_animalBase);
-		newAnimalGO.transform.position = (this.transform.position + other.transform.position) / 2;
-		Animal newAnimal = newAnimalGO.GetComponent<Animal>();
-		newAnimal.Inherit(this, other);
-	}
+        other.Idle();
+        GameObject newAnimalGO = Instantiate(GameController.GetInstance().animalBase);
+      
+        newAnimalGO.transform.position = (transform.position + other.transform.position) / 2;
+        GetRigidbody().velocity = Vector2.zero;
+        other.GetRigidbody().velocity = Vector2.zero;
+        GetRigidbody().AddForce(((transform.position - newAnimalGO.transform.position).normalized + Vector3.up) * 300f);
+        other.GetRigidbody().AddForce(((other.transform.position - newAnimalGO.transform.position).normalized + Vector3.up) * 300f);Animal newAnimal = newAnimalGO.GetComponent<Animal>();
+        newAnimal.Inherit(this, other);
 
-	public Rigidbody2D GetRigidbody()
+    }
+
+    public Rigidbody2D GetRigidbody()
 	{
 		return m_rigidbody;
 	}

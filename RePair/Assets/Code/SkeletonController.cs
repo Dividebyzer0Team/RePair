@@ -54,17 +54,4 @@ public class SkeletonController : MonoBehaviour
 
         skel.SetSkeleton(skelData, parentSkelAnim);
     }
- 
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetBodyPart(null, "Red");
-        SwitchAnimationState("walk");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
