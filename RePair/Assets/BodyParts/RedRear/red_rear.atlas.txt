@@ -1,0 +1,27 @@
+
+red_rear.png
+size: 385,544
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+red_butt
+  rotate: false
+  xy: 2, 312
+  size: 363, 230
+  orig: 363, 230
+  offset: 0, 0
+  index: -1
+red_leg
+  rotate: false
+  xy: 2, 2
+  size: 164, 308
+  orig: 164, 308
+  offset: 0, 0
+  index: -1
+red_tail
+  rotate: true
+  xy: 168, 79
+  size: 231, 215
+  orig: 231, 215
+  offset: 0, 0
+  index: -1

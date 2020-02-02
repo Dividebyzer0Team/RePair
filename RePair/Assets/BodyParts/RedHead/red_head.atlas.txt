@@ -1,0 +1,13 @@
+
+red_head.png
+size: 634,449
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+red_head
+  rotate: false
+  xy: 2, 2
+  size: 630, 445
+  orig: 630, 445
+  offset: 0, 0
+  index: -1

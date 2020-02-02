@@ -1,0 +1,27 @@
+
+elephant_rear.png
+size: 740,487
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eleph-rearbody
+  rotate: false
+  xy: 2, 2
+  size: 515, 483
+  orig: 515, 674
+  offset: 0, 0
+  index: -1
+eleph_leg
+  rotate: false
+  xy: 519, 60
+  size: 161, 172
+  orig: 161, 172
+  offset: 0, 0
+  index: -1
+eleph_teil
+  rotate: true
+  xy: 519, 234
+  size: 251, 219
+  orig: 251, 219
+  offset: 0, 0
+  index: -1

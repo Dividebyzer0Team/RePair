@@ -1,0 +1,20 @@
+
+red_front.png
+size: 813,474
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+red_chest
+  rotate: true
+  xy: 486, 131
+  size: 341, 325
+  orig: 341, 325
+  offset: 0, 0
+  index: -1
+red_wing
+  rotate: false
+  xy: 2, 2
+  size: 482, 470
+  orig: 482, 470
+  offset: 0, 0
+  index: -1

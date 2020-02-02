@@ -1,0 +1,20 @@
+
+elephant_front.png
+size: 681,491
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eleph-frontbody
+  rotate: false
+  xy: 2, 2
+  size: 514, 487
+  orig: 514, 673
+  offset: 0, 0
+  index: -1
+eleph_leg
+  rotate: false
+  xy: 518, 317
+  size: 161, 172
+  orig: 161, 172
+  offset: 0, 0
+  index: -1
