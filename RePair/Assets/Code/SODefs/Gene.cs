@@ -11,7 +11,7 @@ public class Gene : ScriptableObject
 		public string name;
 		public float factor;
 	}
-
+    public string animalName;
 	public GameObject representation;
 	public List <Trait> traits;
 }

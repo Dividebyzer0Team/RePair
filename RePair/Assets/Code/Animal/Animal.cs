@@ -55,15 +55,20 @@ public class Animal : MonoBehaviour
 			m_rigidbody.gravityScale = 0f;
 		}
 
-		Invoke("Die", GetTrait("lifetime"));
+		//Invoke("Die", GetTrait("lifetimme"));
 		float size = GetTrait("size");
-		GameObject legsGO = Instantiate(m_genome.Legs.representation, m_view.transform);
-		legsGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-		GameObject bodyGO = Instantiate(m_genome.Body.representation, m_view.transform);
-		bodyGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-		GameObject headGO = Instantiate(m_genome.Head.representation, m_view.transform);
-		headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
-		transform.localScale = new Vector3(size, size, 1f);
+        m_view.SetBodyPart("Head", m_genome.Head.animalName);
+        m_view.SetBodyPart("Front", m_genome.Body.animalName);
+        m_view.SetBodyPart("Rear", m_genome.Legs.animalName);
+        m_view.enabled = false;
+        m_view.enabled = true;
+        //GameObject legsGO = Instantiate(m_genome.Legs.representation, m_view.transform);
+        //legsGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+        //GameObject bodyGO = Instantiate(m_genome.Body.representation, m_view.transform);
+        //bodyGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+        //GameObject headGO = Instantiate(m_genome.Head.representation, m_view.transform);
+        //headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
+        transform.localScale = new Vector3(size, size, 1f);
 	}
 
 
@@ -79,12 +84,13 @@ public class Animal : MonoBehaviour
 		m_rigidbody = GetComponent<Rigidbody2D>();
 		if (preset != null)
 			InitFromPreset();
-		Idle();
+        Invoke("Idle", 3f);
 	}
 
 	void FixedUpdate()
 	{
-		m_behaviour.Update(Time.fixedDeltaTime);
+		if (m_behaviour != null)
+            m_behaviour.Update(Time.fixedDeltaTime);
 		m_traits["age"] += Time.fixedDeltaTime;
         SetOrientation(m_rigidbody.velocity.x > 0);
     }
