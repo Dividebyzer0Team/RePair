@@ -55,9 +55,9 @@ public class Animal : MonoBehaviour
 		m_traits["age"] = 0f;
 		m_traits["currentSize"] = GetTrait("size") * 0.5f;
 		float size = GetTrait("size") * 0.5f;
-		m_view.SetBodyPart("Head", m_genome.Head.animalName);
-		m_view.SetBodyPart("Front", m_genome.Body.animalName);
-		m_view.SetBodyPart("Rear", m_genome.Legs.animalName);
+		m_view.SetBodyPart("Head", m_genome.Head.skeletonAsset);
+		m_view.SetBodyPart("Front", m_genome.Body.skeletonAsset);
+		m_view.SetBodyPart("Rear", m_genome.Legs.skeletonAsset);
 		transform.localScale = new Vector3(size, size, 1f);
 		m_active = true;
 		Invoke("Die", GetTrait("lifetime"));

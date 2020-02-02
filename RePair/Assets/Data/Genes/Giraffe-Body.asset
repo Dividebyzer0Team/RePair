@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Giraffe-Body
   m_EditorClassIdentifier: 
   animalName: Jiraffe
+  skeletonAsset: {fileID: 11400000, guid: 1edfb4d6dd5e9b74886803c8f660b2f4, type: 2}
   representation: {fileID: 0}
   traits:
   - name: size

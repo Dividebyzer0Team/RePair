@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Elephant-Body
   m_EditorClassIdentifier: 
   animalName: Elephant
+  skeletonAsset: {fileID: 11400000, guid: 7bb4bcdc1fb143f49b2b040a14988d59, type: 2}
   representation: {fileID: 0}
   traits:
   - name: size

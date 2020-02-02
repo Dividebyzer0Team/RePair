@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Zebra-Body
   m_EditorClassIdentifier: 
   animalName: Zebra
+  skeletonAsset: {fileID: 11400000, guid: 18b5b499e6a04974482dd5fd601f33ca, type: 2}
   representation: {fileID: 6776935473807954563, guid: 875c29cf71f664a178932115e25e8c91,
     type: 3}
   traits:

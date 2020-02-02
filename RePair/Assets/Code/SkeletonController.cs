@@ -19,20 +19,12 @@ public class SkeletonController : MonoBehaviour
  
     // "Head", "Front", "Rear"
     // "Zebra", "Rhino", "Jiraffe", "Goose", "Red", "Elephant"
-    public void SetBodyPart(string slot, string phenotype)
+    public void SetBodyPart(string slot, SkeletonDataAsset skelData)
     {
         if (slot == null) {
-            SetBodyPart("Head", phenotype);
-            SetBodyPart("Front", phenotype);
-            SetBodyPart("Rear", phenotype);
-            return;
-        }
- 
-        string fname = phenotype.ToLower() + "_" + slot.ToLower() + "_SkeletonData.asset";
-        string path = "Assets/BodyParts/" + phenotype + slot + "/" + fname;
-        SkeletonDataAsset skelData = (SkeletonDataAsset) AssetDatabase.LoadAssetAtPath("Assets/BodyParts/" + phenotype + slot + "/" + phenotype.ToLower() + "_" + slot.ToLower() + "_SkeletonData.asset", typeof(SkeletonDataAsset));
-        if (skelData == null) {
-            Debug.Log("Asset " + fname + " not found (" + path + ")");
+            SetBodyPart("Head", skelData);
+            SetBodyPart("Front", skelData);
+            SetBodyPart("Rear", skelData);
             return;
         }
 
@@ -69,12 +61,5 @@ public class SkeletonController : MonoBehaviour
 
         frontSkelController.OnParentSkeletonChanged(rear.GetComponent<SkeletonAnimation>());
         headSkelController.OnParentSkeletonChanged(front.GetComponent<SkeletonAnimation>());
-
-        // test
-         SetBodyPart(null, "Zebra");
-         SwitchAnimationState("idle");
-         SetBodyPart("Rear", "Goose");
-         SwitchAnimationState("walk");
-         SetBodyPart("Head", "Elephant");
     }
 }

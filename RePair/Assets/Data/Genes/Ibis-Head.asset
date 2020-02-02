@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ibis-Head
   m_EditorClassIdentifier: 
   animalName: Red
+  skeletonAsset: {fileID: 11400000, guid: 311771955e526e24f89d34a353e2f6e2, type: 2}
   representation: {fileID: 0}
   traits:
   - name: size

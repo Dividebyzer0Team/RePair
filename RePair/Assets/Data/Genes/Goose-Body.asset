@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Goose-Body
   m_EditorClassIdentifier: 
   animalName: Goose
+  skeletonAsset: {fileID: 11400000, guid: c7bee83c161117f40b241bebea1a5414, type: 2}
   representation: {fileID: 8722358038047422501, guid: 1d9c6bf2a948c4dd4b6b2111c971a1e7,
     type: 3}
   traits:

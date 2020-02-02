@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 [CreateAssetMenu(fileName = "Gene", menuName = "RePair/Gene", order = 1)]
 public class Gene : ScriptableObject
@@ -12,6 +13,7 @@ public class Gene : ScriptableObject
 		public float factor;
 	}
     public string animalName;
+  public SkeletonDataAsset skeletonAsset;
 	public GameObject representation;
 	public List <Trait> traits;
 }
