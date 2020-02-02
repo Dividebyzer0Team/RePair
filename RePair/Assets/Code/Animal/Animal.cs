@@ -13,6 +13,7 @@ public class Animal : MonoBehaviour
 	Behaviour m_behaviour;
 	SkeletonController m_view;
 	bool m_orientation; // true = left
+	float m_hungerFactor;
 
 	enum MovementMethod
 	{
@@ -39,7 +40,6 @@ public class Animal : MonoBehaviour
 	{
 		m_genome = Genome.Breed(parent1.GetGenome(), parent2.GetGenome());
 		InitAnimal();
-
 	}
 
 	private void InitAnimal()
@@ -64,6 +64,12 @@ public class Animal : MonoBehaviour
 		GameObject headGO = Instantiate(m_genome.Head.representation, m_view.transform);
 		headGO.transform.localScale = new Vector2(size * 0.1f, size * 0.1f);
 		transform.localScale = new Vector3(size, size, 1f);
+
+		if (m_traits.ContainsKey("stomachSize"))
+		{
+			m_traits["stomachFullness"] = m_traits["stomachSize"];
+			m_hungerFactor = GameObject.Find("GameController").GetComponent <GameController> ().animalHungerFactor;
+		}
 	}
 
 
@@ -84,15 +90,28 @@ public class Animal : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		m_behaviour.Update(Time.fixedDeltaTime);
+    if (m_behaviour != null) m_behaviour.Update(Time.fixedDeltaTime);
+    SetOrientation(m_rigidbody.velocity.x > 0);
+
+		// aging
 		m_traits["age"] += Time.fixedDeltaTime;
-        SetOrientation(m_rigidbody.velocity.x > 0);
-    }
+
+		// hunger
+		if (m_traits.ContainsKey("stomachSize"))
+		{
+			m_traits["stomachFullness"] -= m_hungerFactor * Time.deltaTime;
+		}
+	}
 
 	public float GetTrait(string traitName)
 	{
 		if (!m_traits.ContainsKey(traitName)) return 0f;
 		return m_traits[traitName];
+	}
+
+	public void SetTrait(string traitName, float traitValue)
+	{
+		m_traits[traitName] = traitValue;
 	}
 
 	public void SetOrientation(bool orientation)
@@ -149,7 +168,16 @@ public class Animal : MonoBehaviour
 
 	public void Decide()
 	{
-		m_behaviour = new Wander(this);
+		bool behaviorSelected = false; // needed for potentially multiple behavior selections (to be implemented)
+		if (m_traits.ContainsKey("stomachSize") && m_traits["stomachFullness"] <= 0)
+		{
+			m_behaviour = new Feed(this);
+			behaviorSelected = true;
+		}
+		if (!behaviorSelected)
+		{
+			m_behaviour = new Wander(this);
+		}
 	}
 
 	public void OrderMeet(Animal other)

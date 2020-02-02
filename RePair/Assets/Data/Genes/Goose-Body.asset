@@ -30,4 +30,4 @@ MonoBehaviour:
   - name: flying
     factor: 2
   - name: stomachSize
-    factor: 2
+    factor: 3
