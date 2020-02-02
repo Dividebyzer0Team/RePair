@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class Animal : MonoBehaviour
 {
+	public enum MovementMethod
+	{
+		WALK,
+		JUMP,
+		FLY
+	}
+
 	public AnimalPreset preset;
 
 	GameObject m_animalBase;
@@ -15,16 +22,7 @@ public class Animal : MonoBehaviour
 	bool m_orientation; // true = left
 	float m_hungerFactor;
 	bool m_active;
-
-	enum MovementMethod
-	{
-		WALK,
-		JUMP,
-		FLY
-	}
-
 	MovementMethod m_movementMethod = MovementMethod.WALK;
-	// ТЕСТОВОЕ
 
 	public Genome GetGenome()
 	{
@@ -173,6 +171,12 @@ public class Animal : MonoBehaviour
 			m_behaviour = new Feed(this);
 			behaviorSelected = true;
 		}
+		if (!behaviorSelected && m_traits.ContainsKey("running") && m_traits.ContainsKey("panic") &&
+		    Random.value < m_traits["panic"])
+		{
+			m_behaviour = new Run(this);
+			behaviorSelected = true;
+		}
 		if (!behaviorSelected)
 		{
 			m_behaviour = new Wander(this);
@@ -195,15 +199,20 @@ public class Animal : MonoBehaviour
         PushParent(this, newAnimal);
     }
 
-    public void PushParent(Animal parent, Animal child)
-    {
-        parent.GetRigidbody().velocity = Vector2.zero;
-        Vector3 force = new Vector2(Mathf.Sign(parent.transform.position.x - child.transform.position.x), 1f) * 100f;
-        parent.GetRigidbody().AddForce(force);
-    }
+  public void PushParent(Animal parent, Animal child)
+  {
+      parent.GetRigidbody().velocity = Vector2.zero;
+      Vector3 force = new Vector2(Mathf.Sign(parent.transform.position.x - child.transform.position.x), 1f) * 100f;
+      parent.GetRigidbody().AddForce(force);
+  }
 
-    public Rigidbody2D GetRigidbody()
+	public Rigidbody2D GetRigidbody()
 	{
 		return m_rigidbody;
+	}
+
+	public void SetMovementMethod(MovementMethod method)
+	{
+		m_movementMethod = method;
 	}
 }
