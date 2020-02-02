@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
 	void HandleBreeding()
 	{
+	if (!GameController.GetInstance().gameStarted)
+	  return;
 		if (debugBreeding)
 		{
 			if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))

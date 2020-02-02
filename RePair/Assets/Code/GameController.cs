@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
 	GameController.instance = this;
 	animals = new List<GameObject>();
 	SpawnAnimals();
+	StartGame();
   }
 
   public void Genocide()
