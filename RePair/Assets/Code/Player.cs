@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
             else if (animal != m_queuedAnimal) // cannot select same animal twice
             {
                 m_queuedAnimal.OrderMeet(animal);
+								m_queuedAnimal.gameObject.AddComponent<LineRenderer>();
                 animal.OrderMeet(m_queuedAnimal);
                 m_queuedAnimal = null;
             }

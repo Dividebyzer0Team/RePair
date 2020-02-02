@@ -106,7 +106,10 @@ public class Animal : MonoBehaviour
 
 	void Awake()
 	{
-	GameController.GetInstance().animals.Add(gameObject);
+	GameController gc = GameController.GetInstance();
+	if (gc.animals == null)
+	  gc.animals = new List<GameObject>();
+	gc.animals.Add(gameObject);
 	m_animalBase = GameObject.Find("GameController").GetComponent<GameController>().animalBase;
 		m_view = GetComponentInChildren<SkeletonController>();
 		m_rigidbody = GetComponent<Rigidbody2D>();

@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
   private void Awake()
   {
 	GameController.instance = this;
+	animals = new List<GameObject>();
 	StartGame();
   }
 
@@ -45,8 +46,11 @@ public class GameController : MonoBehaviour
 		gameStarted = true;
 		foreach (AnimalSpawn spawn in spawns)
 		{
-		  GameObject animalGO = Instantiate(spawn.prefab);
-		  animalGO.transform.position = new Vector2(Random.Range(-gameBounds.transform.localScale.x / 50, gameBounds.transform.localScale.x / 50), 0);
+			for (int i = 1; i<= spawn.amount; i++)
+		  {
+				GameObject animalGO = Instantiate(spawn.prefab);
+				animalGO.transform.position = new Vector2(Random.Range(-gameBounds.transform.localScale.x / 2, gameBounds.transform.localScale.x / 2), 0);
+		  }
 		}
   }
 
