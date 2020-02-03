@@ -36,8 +36,9 @@ public class Animal : MonoBehaviour
             var partView = child.gameObject.GetComponent<MeshRenderer>();
             if (partView)
                 partView.enabled = visible;
-            m_visible = visible;
         }
+
+        m_visible = visible;
     }
 
 	public Genome GetGenome()
