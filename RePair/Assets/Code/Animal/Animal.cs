@@ -93,7 +93,7 @@ public class Animal : MonoBehaviour
 		if (m_traits.ContainsKey("stomachSize"))
 		{
 			m_traits["stomachFullness"] = m_traits["stomachSize"];
-			m_hungerFactor = GameObject.Find("GameController").GetComponent<GameController>().animalHungerFactor;
+			m_hungerFactor = GameController.GetInstance().animalHungerFactor;
 		}
 
         // new animal never had sex before
