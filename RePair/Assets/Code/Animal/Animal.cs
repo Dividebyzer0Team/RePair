@@ -24,8 +24,15 @@ public class Animal : MonoBehaviour
 	bool m_active;
 	bool m_dead;
     bool m_visible = true;
-  bool m_presetted = false;
+    bool m_presetted = false;
+    float m_timeSinceLastMating = 0.0f;
+    bool fertile = true;
 	MovementMethod m_movementMethod = MovementMethod.WALK;
+
+    public bool IsFertile()
+    {
+        return fertile;
+    }
 
     public void SetVisibility(bool visible)
     {
@@ -88,6 +95,9 @@ public class Animal : MonoBehaviour
 			m_traits["stomachFullness"] = m_traits["stomachSize"];
 			m_hungerFactor = GameObject.Find("GameController").GetComponent<GameController>().animalHungerFactor;
 		}
+
+        // new animal never had sex before
+        m_timeSinceLastMating = GameController.GetInstance().defaultMatingCooldown;
 	}
 
 	public bool IsDead()
@@ -108,6 +118,9 @@ public class Animal : MonoBehaviour
 
 	void ManageAge(float deltaTime)
 	{
+        if (m_dead)
+          return;
+
 		m_traits["age"] += deltaTime;
 		float age = GetTrait("age");
 		float size = GetTrait("size");
@@ -119,9 +132,26 @@ public class Animal : MonoBehaviour
 		transform.localScale = new Vector3(m_orientation * currentSize, currentSize, 1f);
 	}
 
+    void ManageFertility(float deltaTime)
+    {
+        if (m_dead) {
+            fertile = false;
+            return;
+        }
+        
+        GameController game = GameController.GetInstance();
+
+        if (m_timeSinceLastMating > game.defaultMatingCooldown) {
+            fertile = fertile || m_traits["age"] > game.defaultFertilityAge;
+        } else {
+            fertile = false;
+            m_timeSinceLastMating += deltaTime;
+        }
+    }
+
 	void DestoySelf()
 	{
-	GameController.GetInstance().animals.Remove(gameObject);
+        GameController.GetInstance().animals.Remove(gameObject);
 		Destroy(gameObject);
 	}
 
@@ -154,8 +184,8 @@ public class Animal : MonoBehaviour
 			m_orientation = 1f;
 		if (GameController.GetInstance().gameStarted)
 		{
-          if (!m_dead)
-            ManageAge(Time.fixedDeltaTime);
+          ManageAge(Time.fixedDeltaTime);
+          ManageFertility(Time.fixedDeltaTime);
 		  
           if (m_traits.ContainsKey("stomachSize"))
 		  {
@@ -264,6 +294,8 @@ public class Animal : MonoBehaviour
 		newAnimal.Inherit(this, other);
 		PushParent(other, newAnimal);
 		PushParent(this, newAnimal);
+        
+        m_timeSinceLastMating = 0.0f;
 	}
 
 	public void PushParent(Animal parent, Animal child)

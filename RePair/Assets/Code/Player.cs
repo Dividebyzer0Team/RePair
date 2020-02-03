@@ -103,19 +103,22 @@ public class Player : MonoBehaviour
 	{
 		if (whatToMake == Arrow.WhatToMake.LOVE)
 		{
-			if (!m_queuedAnimal || m_queuedAnimal.IsDead())
-			{
-				m_queuedAnimal = animal;
-				Instantiate(matingReadyEffect, m_queuedAnimal.transform);
-			}
-			else if (animal != m_queuedAnimal) // cannot select same animal twice
-			{
-				Instantiate(matingReadyEffect, animal.transform);
-				m_queuedAnimal.OrderMeet(animal);
-				//m_queuedAnimal.gameObject.AddComponent<LineRenderer>();
-				animal.OrderMeet(m_queuedAnimal);
-				m_queuedAnimal = null;
-			}
+            if (animal.IsFertile())
+            {
+                if (!m_queuedAnimal || m_queuedAnimal.IsDead())
+                {
+                    m_queuedAnimal = animal;
+                    Instantiate(matingReadyEffect, m_queuedAnimal.transform);
+                }
+                else if (animal != m_queuedAnimal) // cannot select same animal twice
+                {
+                    Instantiate(matingReadyEffect, animal.transform);
+                    m_queuedAnimal.OrderMeet(animal);
+                    //m_queuedAnimal.gameObject.AddComponent<LineRenderer>();
+                    animal.OrderMeet(m_queuedAnimal);
+                    m_queuedAnimal = null;
+                }
+            }
 		}
 		else
 		{

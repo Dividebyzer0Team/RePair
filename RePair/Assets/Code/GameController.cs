@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
   public float animalFeedingFactor = 1.0f;
   public float animalRunningDirectionRandomizeInterval = 0.25f;
   public bool gameStarted;
+  public float defaultFertilityAge = 15.0f;
+  public float defaultMatingCooldown = 6.0f; 
   
   public List<GameObject> animals;
   [System.Serializable]
