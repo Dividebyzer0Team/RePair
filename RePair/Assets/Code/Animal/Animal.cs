@@ -29,6 +29,8 @@ public class Animal : MonoBehaviour
     bool fertile = true;
 	MovementMethod m_movementMethod = MovementMethod.WALK;
 
+    public int ActiveDnaId => m_genome.ActiveDnaId;
+
     public bool IsFertile()
     {
         return fertile;
@@ -98,6 +100,8 @@ public class Animal : MonoBehaviour
 
         // new animal never had sex before
         m_timeSinceLastMating = GameController.GetInstance().defaultMatingCooldown;
+
+        GameController.GetInstance().UpdateSpeciesWatch();
 	}
 
 	public bool IsDead()

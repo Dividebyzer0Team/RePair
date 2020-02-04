@@ -5,12 +5,15 @@ public class Genome
 {
 	private List <Gene> m_genes;
 	private List <Gene> m_inactiveGenes;
+    private int activeDnaId = 0;
 
 	// all genes and individual parts as read-only properties
 	public List <Gene> Genes => m_genes;
 	public Gene Head => m_genes[0];
 	public Gene Body => m_genes[1];
 	public Gene Legs => m_genes[2];
+
+    public int ActiveDnaId => activeDnaId;
 
 	private Genome()
 	{
@@ -23,6 +26,7 @@ public class Genome
 		m_genes = new List <Gene> (genes);
 		// at first generation inactive genes are the same as active
 		m_inactiveGenes = new List <Gene> (genes);
+        activeDnaId = CalculateDnaId(m_genes);
 	}
 
 	public static Genome Breed(Genome parent1, Genome parent2)
@@ -51,8 +55,19 @@ public class Genome
 			child.m_inactiveGenes.Add(allGenes[inactiveGeneSetIndex][i]);
 		}
 
+        child.activeDnaId = CalculateDnaId(child.m_genes);
 		return child;
 	}
+
+    public static int CalculateDnaId(List<Gene> genes)
+    {
+        int result = 0;
+        foreach (Gene gene in genes) {
+            if (gene.id != Gene.GeneId.UNKNOWN)
+                result |= (1 << (int) gene.id);
+        }
+        return result;
+    }
 
 	public Dictionary <string, float> GetAllTraits()
 	{

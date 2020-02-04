@@ -4,6 +4,8 @@ public class Die : Behaviour
     public Die(Animal host) {
         m_host = host;
         m_name = "Die";
+
+        GameController.GetInstance().UpdateSpeciesWatch();
     }
 
     float m_wanderTime;

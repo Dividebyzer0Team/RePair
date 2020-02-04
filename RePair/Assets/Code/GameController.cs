@@ -3,26 +3,30 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
-  public GameObject animalBase;
-	public GameObject gameBounds;
-	public GameObject matingEffect;
-	public float animalHungerFactor = 1.0f;
-  public float animalFeedingFactor = 1.0f;
-  public float animalRunningDirectionRandomizeInterval = 0.25f;
-  public bool gameStarted;
-  public float defaultFertilityAge = 15.0f;
-  public float defaultMatingCooldown = 6.0f; 
-  
-  public List<GameObject> animals;
   [System.Serializable]
   public struct AnimalSpawn
   {
 	public GameObject prefab;
 	public int amount;
   }
+
+  public GameObject animalBase;
+	public GameObject gameBounds;
+	public GameObject matingEffect;
+    public float animalHungerFactor = 1.0f;
+  public float animalFeedingFactor = 1.0f;
+  public float animalRunningDirectionRandomizeInterval = 0.25f;
+  public bool gameStarted;
+  public float defaultFertilityAge = 15.0f;
+  public float defaultMatingCooldown = 6.0f;
+  public AnimalPreset watchSpecies;
+
+  public List<GameObject> animals;
   public List<AnimalSpawn> spawns;
 
-  static GameController instance;
+  private static GameController instance;
+  private int watchSpeciesDnaId = -1;
+
   public static GameController GetInstance()
   {
 	return GameController.instance;
@@ -32,6 +36,8 @@ public class GameController : MonoBehaviour
   {
 	GameController.instance = this;
 	animals = new List<GameObject>();
+    if (watchSpecies != null)
+        watchSpeciesDnaId = Genome.CalculateDnaId(watchSpecies.genes);
 	SpawnAnimals();
 	StartGame();
   }
@@ -56,6 +62,21 @@ public class GameController : MonoBehaviour
 				animalGO.transform.position = new Vector2(Random.Range(-gameBounds.transform.localScale.x / 2, gameBounds.transform.localScale.x / 2), 0);
 		  }
 		}
+  }
+
+  public void UpdateSpeciesWatch()
+  {
+      if (watchSpeciesDnaId < 0)
+          // not watching anything
+          return;
+
+      int watchCount = 0;
+      foreach (GameObject animalGO in animals) {
+          Animal animal = animalGO.GetComponent<Animal>();
+          if (watchSpeciesDnaId == animal.ActiveDnaId && !animal.IsDead())
+              watchCount += 1;
+      }
+      Debug.Log(">>> Species left: " + watchCount);
   }
 
 	public void StartGame()

@@ -56,6 +56,7 @@ MonoBehaviour:
   gameStarted: 1
   defaultFertilityAge: 15
   defaultMatingCooldown: 6
+  watchSpecies: {fileID: 11400000, guid: b8553fee52d8d4e029a434f1c0e5afc4, type: 2}
   animals: []
   spawns:
   - prefab: {fileID: 8358506345254341901, guid: 638f57889deb441a8b0f893823fc5fe2,
