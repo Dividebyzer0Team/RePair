@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Rhinoceros-Body
   m_EditorClassIdentifier: 
-  animalName: Rhino
+  id: 14
   skeletonAsset: {fileID: 11400000, guid: f13439a32a0e84f19bd3672350cc4118, type: 2}
-  representation: {fileID: 9033221934227997776, guid: 8b261ca793e9949b68fdb7bce3835dc4,
-    type: 3}
   traits:
   - name: size
     factor: 1.2

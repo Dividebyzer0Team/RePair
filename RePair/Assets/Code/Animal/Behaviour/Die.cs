@@ -5,7 +5,10 @@ public class Die : Behaviour
         m_host = host;
         m_name = "Die";
 
-        GameController.GetInstance().UpdateSpeciesWatch();
+       Hud[] huds = Resources.FindObjectsOfTypeAll<Hud>();
+        foreach (Hud hud in huds) {
+            hud.UpdateHud();
+        }
     }
 
     float m_wanderTime;

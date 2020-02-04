@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
 
   private static GameController instance;
   private int watchSpeciesDnaId = -1;
+  
+  public int WatchSpeciesDnaId => watchSpeciesDnaId;
 
   public static GameController GetInstance()
   {
@@ -36,10 +38,22 @@ public class GameController : MonoBehaviour
   {
 	GameController.instance = this;
 	animals = new List<GameObject>();
-    if (watchSpecies != null)
-        watchSpeciesDnaId = Genome.CalculateDnaId(watchSpecies.genes);
-	SpawnAnimals();
+
+    watchSpeciesDnaId = Genome.CalculateDnaId(watchSpecies.genes);
+    SpawnAnimals();
 	StartGame();
+  }
+
+  public GameObject FindObjectIncludingInactive(string name)
+  { 
+    GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+    foreach (GameObject obj in objects) {
+        if (obj.name == name) {
+            return obj;
+        }
+    }
+
+    return null;
   }
 
   public void Genocide()
@@ -62,21 +76,6 @@ public class GameController : MonoBehaviour
 				animalGO.transform.position = new Vector2(Random.Range(-gameBounds.transform.localScale.x / 2, gameBounds.transform.localScale.x / 2), 0);
 		  }
 		}
-  }
-
-  public void UpdateSpeciesWatch()
-  {
-      if (watchSpeciesDnaId < 0)
-          // not watching anything
-          return;
-
-      int watchCount = 0;
-      foreach (GameObject animalGO in animals) {
-          Animal animal = animalGO.GetComponent<Animal>();
-          if (watchSpeciesDnaId == animal.ActiveDnaId && !animal.IsDead())
-              watchCount += 1;
-      }
-      Debug.Log(">>> Species left: " + watchCount);
   }
 
 	public void StartGame()

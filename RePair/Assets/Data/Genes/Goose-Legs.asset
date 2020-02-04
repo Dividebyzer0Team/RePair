@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Goose-Legs
   m_EditorClassIdentifier: 
-  animalName: Goose
+  id: 3
   skeletonAsset: {fileID: 11400000, guid: 7ebf429c8fcfab344b8762910200b63d, type: 2}
-  representation: {fileID: 1747606520618065318, guid: ed534d6a081654d398b28e2d420aaf06,
-    type: 3}
   traits:
   - name: size
     factor: 0.6

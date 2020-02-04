@@ -101,7 +101,10 @@ public class Animal : MonoBehaviour
         // new animal never had sex before
         m_timeSinceLastMating = GameController.GetInstance().defaultMatingCooldown;
 
-        GameController.GetInstance().UpdateSpeciesWatch();
+        Hud[] huds = Resources.FindObjectsOfTypeAll<Hud>();
+        foreach (Hud hud in huds) {
+            hud.UpdateHud();
+        }
 	}
 
 	public bool IsDead()

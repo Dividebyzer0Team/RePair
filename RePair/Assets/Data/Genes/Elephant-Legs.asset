@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Elephant-Legs
   m_EditorClassIdentifier: 
-  animalName: Elephant
+  id: 9
   skeletonAsset: {fileID: 11400000, guid: bfbb7271631bb2542a3cab37a468237a, type: 2}
-  representation: {fileID: 0}
   traits:
   - name: size
     factor: 1.7

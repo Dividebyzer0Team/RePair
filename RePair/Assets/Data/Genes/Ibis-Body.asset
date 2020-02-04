@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6f64303080048b78238f4fe8658a, type: 3}
   m_Name: Ibis-Body
   m_EditorClassIdentifier: 
-  animalName: Red
+  id: 5
   skeletonAsset: {fileID: 11400000, guid: 44188267b94c1634c816c2d036be5ce5, type: 2}
-  representation: {fileID: 0}
   traits:
   - name: size
     factor: 0.5
