@@ -21308,6 +21308,21 @@ PrefabInstance:
       propertyPath: m_Alignment
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3799044140914531153, guid: a23fbbbddbe104bc89c94d9fb81337de,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799044141977889207, guid: a23fbbbddbe104bc89c94d9fb81337de,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799044142278804220, guid: a23fbbbddbe104bc89c94d9fb81337de,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4524390598929703008, guid: a23fbbbddbe104bc89c94d9fb81337de,
         type: 3}
       propertyPath: m_ReceiveShadows

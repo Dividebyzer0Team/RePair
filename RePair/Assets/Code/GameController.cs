@@ -10,6 +10,32 @@ public class GameController : MonoBehaviour
 	public int amount;
   }
 
+  public enum ComparisonOperator
+  {
+    EQUAL,
+    LESS,
+    GREATER,
+    LESS_OR_EQUAL,
+    GREATER_OR_EQUAL
+  }
+
+  [System.Serializable]
+  public class SpeciesComparisonExpr
+  {
+    public AnimalPreset species;
+    public ComparisonOperator comparator;
+    public int amount;
+
+    private int dnaId = -1;
+    public int DnaId {
+        get {
+            if (species != null && dnaId < 0)
+                dnaId = Genome.CalculateDnaId(species.genes);
+            return dnaId;
+        }
+    }
+  }
+
   public GameObject animalBase;
 	public GameObject gameBounds;
 	public GameObject matingEffect;
@@ -19,15 +45,12 @@ public class GameController : MonoBehaviour
   public bool gameStarted;
   public float defaultFertilityAge = 15.0f;
   public float defaultMatingCooldown = 6.0f;
-  public AnimalPreset watchSpecies;
+  public SpeciesComparisonExpr winCondition;
 
   public List<GameObject> animals;
   public List<AnimalSpawn> spawns;
 
   private static GameController instance;
-  private int watchSpeciesDnaId = -1;
-  
-  public int WatchSpeciesDnaId => watchSpeciesDnaId;
 
   public static GameController GetInstance()
   {
@@ -39,7 +62,6 @@ public class GameController : MonoBehaviour
 	GameController.instance = this;
 	animals = new List<GameObject>();
 
-    watchSpeciesDnaId = Genome.CalculateDnaId(watchSpecies.genes);
     SpawnAnimals();
 	StartGame();
   }
