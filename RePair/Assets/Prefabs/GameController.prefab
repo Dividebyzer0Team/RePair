@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 856422149561662863}
   - component: {fileID: 856422149561662862}
   - component: {fileID: 7923587743068817170}
+  - component: {fileID: 3872644675537504373}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -56,7 +57,6 @@ MonoBehaviour:
   gameStarted: 1
   defaultFertilityAge: 15
   defaultMatingCooldown: 6
-  watchSpecies: {fileID: 11400000, guid: b8553fee52d8d4e029a434f1c0e5afc4, type: 2}
   animals: []
   spawns:
   - prefab: {fileID: 8358506345254341901, guid: 638f57889deb441a8b0f893823fc5fe2,
@@ -89,6 +89,22 @@ MonoBehaviour:
   min: 30
   max: 30
   changeInterval: 12
+--- !u!114 &3872644675537504373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856422149561662856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45195685fbfed8489d927c8cdc36ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allOfThese:
+  - species: {fileID: 11400000, guid: b8553fee52d8d4e029a434f1c0e5afc4, type: 2}
+    comparator: 0
+    amount: 10
 --- !u!1 &8981288774581058677
 GameObject:
   m_ObjectHideFlags: 0
