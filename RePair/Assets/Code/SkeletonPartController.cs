@@ -47,7 +47,6 @@ public class SkeletonPartController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Vector3 localPos = gameObject.transform.localPosition;
@@ -59,7 +58,6 @@ public class SkeletonPartController : MonoBehaviour
         gameObject.transform.localPosition = new Vector3(initialLocalPos.x, initialLocalPos.y, initialLocalPos.z);
     }
 
-    // Update is called once per frame
     public void LateUpdate()
     {
         if (stackPoint != null) {
