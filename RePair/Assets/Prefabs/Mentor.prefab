@@ -113,9 +113,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4764284028042915704}
-  m_Text: "Hey, you there! \nNew one, right? Can you \nwatch over these animals for
-    me? \nUse you mouse to look around.\nHold left button to aim and\nrelease it
-    to launch an arrow.\nPair animals of the same kind.\nGood luck!"
+  m_Text: "\n\n!!! WTF dude!?\nJust what have you done\nto my little precious zoo?\u2026\r"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -293,7 +291,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 900
-  m_Sprite: {fileID: 21300000, guid: 24ae5cbd8f71e4c46a7aa8b7412db236, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5cc9b51c739774298a19d49a707e5813, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

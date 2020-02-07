@@ -8,40 +8,46 @@ public class UIManager : MonoBehaviour
 	public GameObject logo;
 	public GameObject tutorialManager;
 	public GameObject goodEnding;
-    // Start is called before the first frame update
-    void Start()
-    {
-			logo.SetActive(true);
-			Invoke("ShowTutor", 6f);
-	
-    }
+	public GameObject badEnding;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	void Start()
+	{
+		logo.SetActive(true);
+		Invoke("ShowTutor", 6f);
+	}
+
+	void Update()
+	{
+
+	}
 
 	void ShowTutor()
-  {
-	tutorialManager.SetActive(true);
-	Invoke("StartGame", 7f);
-	Invoke("ShowEndMentor", 300f);
-  }
+	{
+		tutorialManager.SetActive(true);
+		Invoke("StartGame", 7f);
+		Invoke("ShowEndMentor", 30f);
+	}
 
 	void RestartGame()
-  {
-	SceneManager.LoadScene("Game");
-  }
+	{
+		SceneManager.LoadScene("Game");
+	}
 
 	void StartGame()
-  {
-	GameController.GetInstance().StartGame();
-  }
+	{
+		GameController.GetInstance().StartGame();
+	}
 
-  void ShowEndMentor()
-  {
-	goodEnding.SetActive(true);
-	Invoke("RestartGame", 10f);
-  }
+	void ShowEndMentor()
+	{
+		GameController game = GameController.GetInstance();
+		WinCondition winCond = game.GetComponent<WinCondition>();
+
+		if (winCond == null || winCond.Satisfies())
+			goodEnding.SetActive(true);
+		else
+			badEnding.SetActive(true);
+
+		Invoke("RestartGame", 10f);
+	}
 }

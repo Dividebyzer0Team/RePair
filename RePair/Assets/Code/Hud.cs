@@ -83,17 +83,11 @@ public class Hud : MonoBehaviour
 		if (game == null || !gameObject.activeSelf)
 			return;
 
-		Dictionary<int, int> animalCounters = new Dictionary<int, int>();
+		WinCondition winCond = game.GetComponent<WinCondition>();
+		if (winCond == null)
+			return;
 
-		foreach (GameObject animalGO in game.animals) {
-			Animal animal = animalGO.GetComponent<Animal>();
-			if (animal.ActiveDnaId != 0 && !animal.IsDead()) {
-				if (!animalCounters.ContainsKey(animal.ActiveDnaId))
-					animalCounters[animal.ActiveDnaId] = 1;
-				else
-					++animalCounters[animal.ActiveDnaId];
-			}
-		}
+		Dictionary<int, int> animalCounters = winCond.CountAnimals();
 
 		foreach (KeyValuePair<int, GameObject> entry in m_widgets) {
 				TextMesh textMesh = entry.Value.GetComponent<TextMesh>();

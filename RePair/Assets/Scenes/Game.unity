@@ -2572,6 +2572,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[1].species
+      value: 
+      objectReference: {fileID: 11400000, guid: 39f9e340818914c9f9d95536026753a8,
+        type: 2}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[1].amount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[0].amount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[0].comparator
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[1].comparator
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[2].species
+      value: 
+      objectReference: {fileID: 11400000, guid: 30da55e53c107184cb1c65e49533e4cd,
+        type: 2}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[2].comparator
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872644675537504373, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: allOfThese.Array.data[2].amount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7923587743068817170, guid: e1493bb5036bf5940aa5eee80cab24ca,
         type: 3}
       propertyPath: min
@@ -3595,6 +3642,7 @@ MonoBehaviour:
   logo: {fileID: 1860133430}
   tutorialManager: {fileID: 715793256}
   goodEnding: {fileID: 275359152}
+  badEnding: {fileID: 1990048688}
 --- !u!4 &529730681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4472651935493148, guid: c1222ad6186ff5b4987009fe7c8573b9,
@@ -21234,6 +21282,13 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 486925785444173247, guid: a23fbbbddbe104bc89c94d9fb81337de,
+        type: 3}
+      propertyPath: m_Text
+      value: "Hey, you there! \nNew one, right? Can you \nwatch over these animals
+        for me? \nUse you mouse to look around.\nHold left button to aim and\nrelease
+        it to launch an arrow.\nPair animals of the same kind.\nGood luck!"
+      objectReference: {fileID: 0}
     - target: {fileID: 486925785448657436, guid: a23fbbbddbe104bc89c94d9fb81337de,
         type: 3}
       propertyPath: m_IsActive
@@ -21244,6 +21299,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MentorTutor
       objectReference: {fileID: 0}
+    - target: {fileID: 486925786017501730, guid: a23fbbbddbe104bc89c94d9fb81337de,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3942a00f8bdba47929acf8a02a7f92ce,
+        type: 3}
     - target: {fileID: 486925786326673672, guid: a23fbbbddbe104bc89c94d9fb81337de,
         type: 3}
       propertyPath: m_Name
