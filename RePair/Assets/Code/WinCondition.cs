@@ -37,19 +37,14 @@ public class WinCondition : MonoBehaviour
 			switch (comparator) {
 				case ComparisonOperator.EQUAL:
 					return otherAmount == amount;
-					break;
 				case ComparisonOperator.LESS:
 					return otherAmount < amount;
-					break;
 				case ComparisonOperator.LESS_OR_EQUAL:
 					return otherAmount <= amount;
-					break;
 				case ComparisonOperator.GREATER:
 					return otherAmount > amount;
-					break;
 				case ComparisonOperator.GREATER_OR_EQUAL:
 					return otherAmount >= amount;
-					break;
 			}
 
 			return true;

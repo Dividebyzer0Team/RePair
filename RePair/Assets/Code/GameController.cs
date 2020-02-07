@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
 	public bool gameStarted;
 	public float defaultFertilityAge = 15.0f;
 	public float defaultMatingCooldown = 6.0f;
+	public int levelTimeout = 300;
 
 	public List<GameObject> animals;
 	public List<AnimalSpawn> spawns;

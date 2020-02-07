@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 	{
 		tutorialManager.SetActive(true);
 		Invoke("StartGame", 7f);
-		Invoke("ShowEndMentor", 30f);
+		Invoke("ShowEndMentor", (float) GameController.GetInstance().levelTimeout);
 	}
 
 	void RestartGame()

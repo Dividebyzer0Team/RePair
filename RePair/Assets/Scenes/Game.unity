@@ -2517,6 +2517,11 @@ PrefabInstance:
       propertyPath: winCondition.amount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 856422149561662862, guid: e1493bb5036bf5940aa5eee80cab24ca,
+        type: 3}
+      propertyPath: levelTimout
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 856422149561662863, guid: e1493bb5036bf5940aa5eee80cab24ca,
         type: 3}
       propertyPath: m_LocalPosition.x
